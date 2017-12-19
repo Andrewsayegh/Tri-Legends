@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+
+
 public class GamePanel extends JPanel implements Runnable {
 
     // Create static values for width and height
@@ -110,7 +112,6 @@ public class GamePanel extends JPanel implements Runnable {
                     thread.sleep(1);
                 } catch (Exception e) {
                     System.out.println("ERROR: yielding thread");
-                    e.printStackTrace();
                 }
                 now = System.nanoTime();
             }
@@ -130,7 +131,6 @@ public class GamePanel extends JPanel implements Runnable {
             g.clearRect(0, 0, width, height);
             gsm.render(g);
         }
-
     }
 
     public void draw() {
