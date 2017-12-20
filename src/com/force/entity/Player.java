@@ -24,7 +24,7 @@ public class Player extends Entity {
     }
 
     public void move() {
-        // TODO: 12/19/17 Fix this: 
+        // TODO: 12/19/17 Fix this:
 
         if (up) {
             dy -= acceleration;
@@ -88,7 +88,7 @@ public class Player extends Entity {
         pos.y = GamePanel.height /2 - 32;
         PlayState.map.y = 0;
 
-        setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
+        setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 8);
 
     }
 
@@ -117,8 +117,8 @@ public class Player extends Entity {
     }
 
     public void render(Graphics2D g) {
-//        g.setColor(Color.green);
-//        g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
+        g.setColor(Color.green);
+        g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
 
         if(attack) {
             g.setColor(Color.red);

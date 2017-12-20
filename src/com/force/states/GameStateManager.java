@@ -10,68 +10,62 @@ import java.util.ArrayList;
 
 public class GameStateManager {
 
-    private ArrayList<GameState> states;
+    private GameState[] states;
 
     public static Vector2f map;
 
+    public static final int NUMBEROFSTATES = 4;
     public static final int PLAY = 0;
     public static final int MENU = 1;
     public static final int PAUSE = 2;
     public static final int GAMEOVER = 3;
 
+    private int currentState;
+
 
     public GameStateManager() {
         map = new Vector2f(GamePanel.width, GamePanel.height);
         Vector2f.setWorldVar(map.x, map.y);
-        states = new ArrayList<GameState>();
-        states.add(new PlayState(this));
+        states = new GameState[NUMBEROFSTATES];
+        currentState = PLAY;
+        loadState(currentState);
     }
 
-    public void removeState(int state){
-        states.remove(state);
+
+    private void loadState(int state) {
+        if (state == MENU)
+            states[state] = new MenuState(this);
+        else if (state == PLAY)
+            states[state] = new PlayState(this);
+       else if (state == PAUSE)
+           states[state] = new PauseState(this);
+       else if (state == GAMEOVER)
+           states[state] = new GameOverState(this);
     }
 
-    public void addState(int state){
-        if (!states.contains(state)) {
-            switch (state) {
-                case PLAY:
-                    states.add(new PlayState(this));
-                    break;
-                case MENU:
-                    states.add(new MenuState(this));
-                    break;
-                case PAUSE:
-                    states.add(new PauseState(this));
-                    break;
-                case GAMEOVER:
-                    states.add(new GameOverState(this));
-                    break;
-            }
-        } else {
-            return;
-        }
+    private void unloadState(int state) {
+        states[state] = null;
     }
 
-    public void addAndRemove(int state){
-        states.remove(0);
-        addState(state);
+    public void setState(int state) {
+        unloadState(currentState);
+        currentState = state;
+        loadState(currentState);
     }
+
 
     public void update(){
         Vector2f.setWorldVar(map.x, map.y);
-        for (GameState s: states) {
-            s.update();
-        }
+        if (states[currentState] != null) states[currentState].update();
+
 
     }
     public void input(MouseHandler mouse, KeyHandler key){
-        for (GameState s: states) {
-            s.input(mouse, key);
-        }
+        if (states[currentState] != null) states[currentState].input(mouse, key);
+
     }
     public void render(Graphics2D g){
-        for (GameState s: states) {
-            s.render(g);
-        }
+        if (states[currentState] != null) states[currentState].render(g);
+
     }
 }
