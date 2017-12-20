@@ -14,8 +14,9 @@ public class Player extends Entity {
 
     public Player(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size);
-        acceleration = 2f;
-        maxSpeed = 4f;
+        acceleration = 1.5f;
+        decelleration = 1.5f;
+        maxSpeed = 3f;
         bounds.setWidth(42);
         bounds.setHeight(20);
         bounds.setXOffset(12);
@@ -23,6 +24,7 @@ public class Player extends Entity {
     }
 
     public void move() {
+        // TODO: 12/19/17 Fix this: 
 
         if (up) {
             dy -= acceleration;
@@ -115,8 +117,8 @@ public class Player extends Entity {
     }
 
     public void render(Graphics2D g) {
-        g.setColor(Color.green);
-        g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
+//        g.setColor(Color.green);
+//        g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
 
         if(attack) {
             g.setColor(Color.red);

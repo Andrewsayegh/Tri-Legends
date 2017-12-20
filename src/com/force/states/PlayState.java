@@ -45,8 +45,9 @@ public class PlayState extends GameState {
         String fps = GamePanel.oldFrameCount + " FPS";
         Sprite.drawArray(g, font, fps, new Vector2f(GamePanel.width - fps.length() * 32, 32), 32, 24);
 
-        String tps = GamePanel.oldTickCount + " TPS";
-        Sprite.drawArray(g, tps, new Vector2f(GamePanel.width - tps.length() * 32, 64), 32, 24);
+        // Not Needed
+//        String tps = GamePanel.oldTickCount + " TPS";
+//        Sprite.drawArray(g, tps, new Vector2f(GamePanel.width - tps.length() * 32, 64), 32, 24);
 
         player.render(g);
     }

@@ -36,5 +36,4 @@ public class TileMapObj extends TileMap {
             block.render(g);
         }
     }
-
 }
