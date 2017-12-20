@@ -12,7 +12,7 @@ public class KeyHandler implements KeyListener {
 
     public static List<Key> keys = new ArrayList<Key>();
 
-    private class Key {
+    public class Key {
         public int presses, absorbs;
         public boolean isDown, clicked;
 

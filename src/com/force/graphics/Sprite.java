@@ -18,6 +18,8 @@ public class Sprite {
     private int wSprite;
     private int hSprite;
 
+    private static Font currentFont;
+
     public Sprite(String file) {
         width = TILE_SIZE;
         height = TILE_SIZE;
@@ -77,10 +79,10 @@ public class Sprite {
     }
 
     public void loadSpriteArray() {
-        spriteArray = new BufferedImage[wSprite][hSprite];
-        for (int x = 0; x < wSprite; x++) {
-            for (int y = 0; y < hSprite; y++) {
-                spriteArray[x][y] = getSprite(x, y);
+        spriteArray = new BufferedImage[hSprite][wSprite];
+        for (int y = 0; y < hSprite; y++) {
+            for (int x = 0; x < wSprite; x++) {
+                spriteArray[y][x] = getSprite(x, y);
             }
         }
     }
@@ -115,12 +117,31 @@ public class Sprite {
         }
     }
 
-    public static void drawArray(Graphics2D g, Font f, String word, Vector2f pos, int width, int height, int xOffset, int yOffset) {
+    public static void drawArray(Graphics2D g, String word, Vector2f pos, int size) {
+        drawArray(g, currentFont, word, pos, size, size, size, 0);
+    }
+
+    public static void drawArray(Graphics2D g, String word, Vector2f pos, int size, int xOffset) {
+        drawArray(g, currentFont, word, pos, size, size, xOffset, 0);
+    }
+
+    public static void drawArray(Graphics2D g, String word, Vector2f pos, int width, int height, int xOffset) {
+        drawArray(g, currentFont, word, pos, width, height, xOffset, 0);
+    }
+
+    public static void drawArray(Graphics2D g, Font f, String word, Vector2f pos, int size, int xOffset) {
+        drawArray(g, f, word, pos, size, size, xOffset, 0);
+    }
+
+    public static void drawArray(Graphics2D g, Font font, String word, Vector2f pos, int width, int height, int xOffset, int yOffset) {
         float x = pos.x;
         float y = pos.y;
+
+        currentFont = font;
+
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) != 32) {
-                g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
+                g.drawImage(font.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
             }
             x += xOffset;
             y += yOffset;

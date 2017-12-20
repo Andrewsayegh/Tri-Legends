@@ -16,6 +16,9 @@ public class GamePanel extends JPanel implements Runnable {
     public static int width;
     public static int height;
 
+    public static int oldFrameCount;
+    public static int oldTickCount;
+
     // Create the thread and vars accordingly
     private Thread thread;
     private boolean running;
@@ -73,7 +76,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         int frameCount = 0;
         int lastSecondTime = (int) (lastUpdateTime / 1000000000);
-        int oldFrameCount = 0;
+        oldFrameCount = 0;
+
+        int tickCount = 0;
+        oldTickCount = 0;
 
         while (running) {
             double now = System.nanoTime();
@@ -102,6 +108,11 @@ public class GamePanel extends JPanel implements Runnable {
                     System.out.println("NEW FRAME " + thisSecond + " " + frameCount);
                     oldFrameCount = frameCount;
                 }
+                if(tickCount != oldTickCount) {
+                    System.out.println("NEW SECOND (T) " + thisSecond + " " + tickCount);
+                    oldTickCount = tickCount;
+                }
+                tickCount = 0;
                 frameCount = 0;
                 lastSecondTime = thisSecond;
             }

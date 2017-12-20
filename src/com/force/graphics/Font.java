@@ -1,6 +1,5 @@
 package com.force.graphics;
 
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
@@ -90,10 +89,10 @@ public class Font {
     }
 
     public BufferedImage getFont(char letter) {
-        int value = letter - 65;
+        int value = letter;
 
         int x = value % wLetter;
-        int y = value / hLetter;
+        int y = value / wLetter;
 
         return getLetter(x, y);
     }
