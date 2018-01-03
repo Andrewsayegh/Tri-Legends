@@ -112,6 +112,7 @@ public class Player extends Entity {
                 dx = 0;
                 dy = 0;
                 fallen = false;
+                manageLives(-1);
             }
         }
     }
@@ -126,7 +127,10 @@ public class Player extends Entity {
         }
 
         g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
+
+        lives.drawHearts(g, LIVES);
     }
+
 
     public void input(MouseHandler mouse, KeyHandler key) {
 

@@ -1,6 +1,7 @@
 package com.force.entity;
 
 import com.force.graphics.Animation;
+import com.force.graphics.Lives;
 import com.force.graphics.Sprite;
 import com.force.util.*;
 
@@ -16,9 +17,11 @@ public abstract class Entity {
     protected final int FALLEN = 4;
     protected final int ATTACK = 5;
     protected final int SPECIAL = 6;
+    protected int LIVES = 3;
     protected int currentAnimation;
 
     protected Animation animate;
+    protected Lives lives;
     protected Sprite sprite;
     protected Vector2f pos;
     protected int size;
@@ -58,6 +61,8 @@ public abstract class Entity {
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
 
         tc = new TileCollision(this);
+
+        lives = new Lives();
 
     }
 
@@ -156,4 +161,14 @@ public abstract class Entity {
     }
 
     public abstract void render(Graphics2D g);
+
+    public void manageLives(int num) {
+        LIVES += num;
+    }
+
+    public boolean isDead() {
+        if(LIVES <= 0)
+            return true;
+        return false;
+    }
 }
