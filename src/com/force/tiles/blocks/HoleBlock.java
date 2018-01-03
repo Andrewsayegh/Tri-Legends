@@ -34,9 +34,10 @@ public class HoleBlock extends Block {
         super.render(g);
         /**
          *SHOW COLLISION BOXES
-         * g.setColor(Color.green);
-         * g.drawRect((int) pos.getWorldVar().x, (int) pos.getWorldVar().y, width, height);
-         **/
+         */
+         g.setColor(Color.green);
+         g.drawRect((int) pos.getWorldVar().x, (int) pos.getWorldVar().y, width, height);
+
     }
 
 }

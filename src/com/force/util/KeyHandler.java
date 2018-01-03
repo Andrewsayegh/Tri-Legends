@@ -76,7 +76,6 @@ public class KeyHandler implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_M) menu.toggle(pressed);
         if (e.getKeyCode() == KeyEvent.VK_ENTER) enter.toggle(pressed);
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) escape.toggle(pressed);
-
     }
 
 
