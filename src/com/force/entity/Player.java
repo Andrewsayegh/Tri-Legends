@@ -8,7 +8,8 @@ import com.force.util.KeyHandler;
 import com.force.util.MouseHandler;
 import com.force.util.Vector2f;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Color;
 
 public class Player extends Entity {
 
@@ -19,7 +20,7 @@ public class Player extends Entity {
         maxSpeed = 3f;
         bounds.setWidth(42);
         bounds.setHeight(20);
-        bounds.setXOffset(12);
+        bounds.setXOffset(10);
         bounds.setYOffset(40);
     }
 
@@ -177,5 +178,4 @@ public class Player extends Entity {
             left = false;
         }
     }
-
 }

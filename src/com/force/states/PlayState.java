@@ -36,7 +36,7 @@ public class PlayState extends GameState {
     public void update() {
         Vector2f.setWorldVar(map.x, map.y);
         if(player.isDead())
-            gsm.setState(3);
+            gsm.setState(GameStateManager.GAMEOVER);
         else
             player.update();
     }
@@ -49,10 +49,6 @@ public class PlayState extends GameState {
         tm.render(g);
         String fps = GamePanel.oldFrameCount + " FPS";
         Sprite.drawArray(g, font, fps, new Vector2f(GamePanel.width - fps.length() * 32, 32), 32, 24);
-
-        // Not Needed
-//        String tps = GamePanel.oldTickCount + " TPS";
-//        Sprite.drawArray(g, tps, new Vector2f(GamePanel.width - tps.length() * 32, 64), 32, 24);
 
         player.render(g);
     }
