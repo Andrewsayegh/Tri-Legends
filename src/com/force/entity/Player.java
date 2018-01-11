@@ -15,9 +15,11 @@ public class Player extends Entity {
 
     public Player(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size);
-        acceleration = 1.5f;
-        decelleration = 1.5f;
-        maxSpeed = 3f;
+//        acceleration = 1.5f;
+//        decelleration = 1.5f;
+//        maxSpeed = 3f;
+        acceleration = 4f;
+        tvConstant = -.5f;
         bounds.setWidth(42);
         bounds.setHeight(20);
         bounds.setXOffset(10);
@@ -27,59 +29,109 @@ public class Player extends Entity {
     public void move() {
         // TODO: 12/19/17 Fix this:
 
-        if (up) {
-            dy -= acceleration;
-            if (dy < -maxSpeed) {
-                dy = -maxSpeed;
-            }
-        } else {
-            if (dy < 0) {
-                dy += decelleration;
-                if (dy > 0) {
-                    dy = 0;
-                }
-            }
+        if (up){
+            dir = (float)(Math.PI/2);
+            if(right)
+                dir -= (float)(Math.PI/4);
+            if (left)
+                dir += (float)(Math.PI/4);
+
+            dx += acceleration*Math.cos(dir);
+            dy -= acceleration*Math.sin(dir);
         }
-        if (down) {
-            dy += acceleration;
-            if (dy > maxSpeed) {
-                dy = maxSpeed;
-            }
-        } else {
-            if (dy > 0) {
-                dy -= decelleration;
-                if (dy < 0) {
-                    dy = 0;
-                }
-            }
+
+        if (down){
+            dir = (float)(-Math.PI/2);
+            if(right)
+                dir += (float)(Math.PI/4);
+            if (left)
+                dir -= (float)(Math.PI/4);
+
+            dx += acceleration*Math.cos(dir);
+            dy -= acceleration*Math.sin(dir);
         }
-        if (left) {
-            dx -= acceleration;
-            if (dx < -maxSpeed) {
-                dx = -maxSpeed;
-            }
-        } else {
-            if (dx < 0) {
-                dx += decelleration;
-                if (dx > 0) {
-                    dx = 0;
-                }
-            }
+
+        if (left && !(down || up)){
+            dir = (float)(Math.PI);
+
+            dx += acceleration*Math.cos(dir);
+            dy -= acceleration*Math.sin(dir);
         }
-        if (right) {
-            dx += acceleration;
-            if (dx > maxSpeed) {
-                dx = maxSpeed;
-            }
-        } else {
-            if (dx > 0) {
-                dx -= decelleration;
-                if (dx < 0) {
-                    dx = 0;
-                }
-            }
+        if (right && !(down || up)){
+            dir = 0;
+
+            dx += acceleration*Math.cos(dir);
+            dy -= acceleration*Math.sin(dir);
         }
+
+        dx += tvConstant*dx;
+        dy += tvConstant*dy;
+
+
+
+//        System.out.println(dy + " dy");
+//        System.out.println(dx + " dx");
+
+
+
+//
+
+//        if (up) {
+//            dy -= acceleration;
+//            if (dy < -maxSpeed) {
+//                dy = -maxSpeed;
+//            }
+//        } else {
+//            if (dy < 0) {
+//                dy += decelleration;
+//                if (dy > 0) {
+//                    dy = 0;
+//                }
+//            }
+//        }
+//        if (down) {
+//            dy += acceleration;
+//            if (dy > maxSpeed) {
+//                dy = maxSpeed;
+//            }
+//        } else {
+//            if (dy > 0) {
+//                dy -= decelleration;
+//                if (dy < 0) {
+//                    dy = 0;
+//                }
+//            }
+//        }
+//        if (left) {
+//            dx -= acceleration;
+//            if (dx < -maxSpeed) {
+//                dx = -maxSpeed;
+//            }
+//        } else {
+//            if (dx < 0) {
+//                dx += decelleration;
+//                if (dx > 0) {
+//                    dx = 0;
+//                }
+//            }
+//        }
+//        if (right) {
+//            dx += acceleration;
+//            if (dx > maxSpeed) {
+//                dx = maxSpeed;
+//            }
+//        } else {
+//            if (dx > 0) {
+//                dx -= decelleration;
+//                if (dx < 0) {
+//                    dx = 0;
+//                }
+//            }
+//        }
+
+
     }
+
 
     private void resetPosition() {
         System.out.println("Reseting Player... ");
