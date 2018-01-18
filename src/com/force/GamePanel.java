@@ -105,11 +105,9 @@ public class GamePanel extends JPanel implements Runnable {
             int thisSecond = (int) (lastUpdateTime / 1000000000);
             if (thisSecond > lastSecondTime) {
                 if (frameCount != oldFrameCount) {
-//                    System.out.println("NEW FRAME " + thisSecond + " " + frameCount);
                     oldFrameCount = frameCount;
                 }
                 if(tickCount != oldTickCount) {
-//                    System.out.println("NEW SECOND (T) " + thisSecond + " " + tickCount);
                     oldTickCount = tickCount;
                 }
                 tickCount = 0;
@@ -149,6 +147,4 @@ public class GamePanel extends JPanel implements Runnable {
         g2.drawImage(img, 0, 0, width, height, null);
         g2.dispose();
     }
-
-
 }

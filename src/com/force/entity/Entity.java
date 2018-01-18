@@ -17,7 +17,7 @@ public abstract class Entity {
     protected final int FALLEN = 4;
     protected final int ATTACK = 5;
     protected final int SPECIAL = 6;
-    protected int LIVES = 3;
+    protected int LIVES = 10;
     protected int currentAnimation;
 
     protected Animation animate;
@@ -39,9 +39,13 @@ public abstract class Entity {
     protected float dx;
     protected float dy;
 
-    protected float maxSpeed = 3f;
-    protected float acceleration = 2f;
-    protected float decelleration = 0.3f;
+//    protected float maxSpeed = 3f;
+//    protected float acceleration = 2f;
+//    protected float decelleration = 0.3f;
+
+    protected float acceleration;
+    protected float tvConstant;
+    protected float dir;
 
     protected AABB hitBounds;
     protected AABB bounds;
@@ -111,17 +115,17 @@ public abstract class Entity {
         this.size = size;
     }
 
-    public void setMaxSpeed(float maxSpeed) {
-        this.maxSpeed = maxSpeed;
-    }
-
-    public void setAcceleration(float acceleration) {
-        this.acceleration = acceleration;
-    }
-
-    public void setDecelleration(float decelleration) {
-        this.decelleration = decelleration;
-    }
+//    public void setMaxSpeed(float maxSpeed) {
+//        this.maxSpeed = maxSpeed;
+//    }
+//
+//    public void setAcceleration(float acceleration) {
+//        this.acceleration = acceleration;
+//    }
+//
+//    public void setDecelleration(float decelleration) {
+//        this.decelleration = decelleration;
+//    }
 
     public AABB getBounds() {
         return bounds;

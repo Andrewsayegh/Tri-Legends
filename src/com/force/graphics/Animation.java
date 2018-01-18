@@ -57,6 +57,7 @@ public class Animation {
             currentFrame = 0;
             timesPlayed ++;
         }
+
     }
 
     public int getDelay() {

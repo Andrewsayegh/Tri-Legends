@@ -29,5 +29,4 @@ public class ObjBlock extends Block {
          g.setColor(Color.white);
          g.drawRect((int) pos.getWorldVar().x, (int) pos.getWorldVar().y, width, height);
     }
-
 }

@@ -26,6 +26,7 @@ public class PlayState extends GameState {
 
         map = new Vector2f();
         Vector2f.setWorldVar(map.x, map.y);
+
         tm = new TileManager("tile/tilemap.xml");
         font = new Font("font/font.png", 10, 10);
 
