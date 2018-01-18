@@ -16,8 +16,8 @@ public class Enemy extends Entity {
     public Enemy(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size);
         acceleration = 1.5f;
-        decelleration = 1.5f;
-        maxSpeed = 3f;
+//        decelleration = 1.5f;
+//        maxSpeed = 3f;
 
         bounds.setWidth(42);
         bounds.setHeight(20);
