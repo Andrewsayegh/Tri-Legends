@@ -72,6 +72,7 @@ public class Sprite {
         BufferedImage sprite = null;
         try {
             sprite = ImageIO.read(getClass().getClassLoader().getResourceAsStream(file));
+            System.out.println("Loaded " + file);
         } catch (Exception e) {
             System.out.println("ERROR: Could not load file: " + file);
         }

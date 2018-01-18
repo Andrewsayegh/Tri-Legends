@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class KeyHandler implements KeyListener {
+public class
+KeyHandler implements KeyListener {
 
     public static List<Key> keys = new ArrayList<Key>();
 

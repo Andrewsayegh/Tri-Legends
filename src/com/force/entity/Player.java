@@ -31,7 +31,8 @@ public class Player extends Entity {
             if (dy < -maxSpeed) {
                 dy = -maxSpeed;
             }
-        } else {
+        }
+        else {
             if (dy < 0) {
                 dy += decelleration;
                 if (dy > 0) {
