@@ -31,7 +31,7 @@ public class PlayState extends GameState {
         font = new Font("font/font.png", 10, 10);
 
         player = new Player(new Sprite("entity/linkFormatted.png"), new Vector2f(0 + (GamePanel.width / 2) - 32, 0 + (GamePanel.height / 2) - 32), 64);
-        guard1 = new Enemy(new Sprite("entity/bat-spritesheet-calciumtrice.png"), new Vector2f(0 + (GamePanel.width / 2) - 32, 0 + (GamePanel.height / 2) - 32), 64);
+        guard1 = new Enemy(new Sprite("entity/bat-spritesheet-calciumtrice.png"), new Vector2f(0 + 100, 0+ 100), 64);
     }
 
     public void update() {
@@ -40,7 +40,7 @@ public class PlayState extends GameState {
             gsm.setState(3);
         else {
             player.update();
-            guard1.update(player);
+            guard1.update(player, 300);
         }
     }
 

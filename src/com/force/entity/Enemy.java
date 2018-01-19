@@ -5,13 +5,16 @@ import com.force.states.PlayState;
 import com.force.util.Vector2f;
 
 import java.awt.*;
+import java.util.Vector;
 
 /**
  * Created by student on 12/20/17.
  */
 public class Enemy extends Entity {
+    public int s = 3;
 
     public long lastTurn = System.currentTimeMillis();
+
 
     public Enemy(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size);
@@ -62,34 +65,37 @@ public class Enemy extends Entity {
         }
 
         if (up)
-            pos.y += -1;
+            pos.y += -s;
         if (down)
-            pos.y += 1;
+            pos.y += s;
         if (left)
-            pos.x += -1;
+            pos.x += -s;
         if (right)
-            pos.x += 1;
+            pos.x += s;
 
 
     }
 
 
     public void move2(Entity player){
-        pos.x += player.dx;
-        pos.y += player.dy;
+        if(getDistanceTo(player) != 0) {
+            float vectorx = (this.pos.x - player.pos.x) / getDistanceTo(player);
+            float vectory = (this.pos.y - player.pos.y) / getDistanceTo(player);
+
+            pos.x -= s*vectorx;
+            pos.y -= s*vectory;
+        }
 
 
     }
 
-    public void update(Entity player){
+    public void update(Entity player, int radius){
         super.update();
         if(LIVES > 0) {
-            move();
-
-            if(getDistanceTo(player) <= 100){
+            if(getDistanceTo(player) >= radius) {
+                move();
+            }else if(getDistanceTo(player) <= radius){
                 move2(player);
-
-
             }
 
             if (!tc.collisionTile(dx, 0)) {
