@@ -17,7 +17,7 @@ public abstract class Entity {
     protected final int FALLEN = 4;
     protected final int ATTACK = 5;
     protected final int SPECIAL = 6;
-    protected int LIVES = 10;
+    protected double LIVES = 3;
     protected int currentAnimation;
 
     protected Animation animate;
@@ -166,7 +166,7 @@ public abstract class Entity {
 
     public abstract void render(Graphics2D g);
 
-    public void manageLives(int num) {
+    public void manageLives(double num) {
         LIVES += num;
     }
 

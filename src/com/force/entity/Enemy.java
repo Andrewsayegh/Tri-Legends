@@ -1,5 +1,6 @@
 package com.force.entity;
 
+import com.force.GamePanel;
 import com.force.graphics.Sprite;
 import com.force.states.PlayState;
 import com.force.util.Vector2f;
@@ -13,7 +14,9 @@ import java.util.Vector;
 public class Enemy extends Entity {
     public int s = 3;
 
-    public long lastTurn = System.currentTimeMillis();
+    public long moveTurn = System.currentTimeMillis();
+    public long attackTurn = System.currentTimeMillis();
+
 
 
     public Enemy(Sprite sprite, Vector2f orgin, int size) {
@@ -27,6 +30,7 @@ public class Enemy extends Entity {
         bounds.setXOffset(12);
         bounds.setYOffset(40);
 
+
     }
 
     public void render(Graphics2D g) {
@@ -38,7 +42,7 @@ public class Enemy extends Entity {
 
     public void move() {
         int rand = (int) (Math.random() * 4);
-        if (System.currentTimeMillis() - lastTurn >= 3000) {
+        if (System.currentTimeMillis() - moveTurn >= GamePanel.oldFrameCount*150) {
 
 
             if (rand == 0) {
@@ -61,9 +65,9 @@ public class Enemy extends Entity {
             } else {
                 right = false;
             }
-            lastTurn = System.currentTimeMillis();
+            moveTurn = System.currentTimeMillis();
         }
-
+        s = 2;
         if (up)
             pos.y += -s;
         if (down)
@@ -84,6 +88,17 @@ public class Enemy extends Entity {
 
             pos.x -= s*vectorx;
             pos.y -= s*vectory;
+        }
+        if(getDistanceTo(player) <= 20) {
+            if (System.currentTimeMillis() - attackTurn >= GamePanel.oldFrameCount * 100) {
+                attack = true;
+                if(attack == true){
+                    player.manageLives(-0.5);
+                }
+
+                attackTurn = System.currentTimeMillis();
+
+            }
         }
 
 
