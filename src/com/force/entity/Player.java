@@ -14,7 +14,7 @@ import java.awt.Color;
 public class Player extends Entity {
 
     public Player(Sprite sprite, Vector2f orgin, int size) {
-        super(sprite, orgin, size);
+        super(sprite, orgin, size, true);
 //        acceleration = 1.5f;
 //        decelleration = 1.5f;
 //        maxSpeed = 3f;
@@ -26,113 +26,49 @@ public class Player extends Entity {
         bounds.setYOffset(40);
     }
 
+    //yeyeye
+
     public void move() {
-        // TODO: 12/19/17 Fix this:
 
-        if (up){
-            dir = (float)(Math.PI/2);
-            if(right)
-                dir -= (float)(Math.PI/4);
+        if (up) {
+            dir = (float) (Math.PI / 2);
+            if (right)
+                dir -= (float) (Math.PI / 4);
             if (left)
-                dir += (float)(Math.PI/4);
+                dir += (float) (Math.PI / 4);
 
-            dx += acceleration*Math.cos(dir);
-            dy -= acceleration*Math.sin(dir);
+            dx += acceleration * Math.cos(dir);
+            dy -= acceleration * Math.sin(dir);
         }
 
-        if (down){
-            dir = (float)(-Math.PI/2);
-            if(right)
-                dir += (float)(Math.PI/4);
+        if (down) {
+            dir = (float) (-Math.PI / 2);
+            if (right)
+                dir += (float) (Math.PI / 4);
             if (left)
-                dir -= (float)(Math.PI/4);
+                dir -= (float) (Math.PI / 4);
 
-            dx += acceleration*Math.cos(dir);
-            dy -= acceleration*Math.sin(dir);
+            dx += acceleration * Math.cos(dir);
+            dy -= acceleration * Math.sin(dir);
         }
 
-        if (left && !(down || up)){
-            dir = (float)(Math.PI);
+        if (left && !(down || up)) {
+            dir = (float) (Math.PI);
 
-            dx += acceleration*Math.cos(dir);
-            dy -= acceleration*Math.sin(dir);
+            dx += acceleration * Math.cos(dir);
+            dy -= acceleration * Math.sin(dir);
         }
-        if (right && !(down || up)){
+        if (right && !(down || up)) {
             dir = 0;
 
-            dx += acceleration*Math.cos(dir);
-            dy -= acceleration*Math.sin(dir);
+            dx += acceleration * Math.cos(dir);
+            dy -= acceleration * Math.sin(dir);
         }
 
-        dx += tvConstant*dx;
-        dy += tvConstant*dy;
-
-
-
-//        System.out.println(dy + " dy");
-//        System.out.println(dx + " dx");
-
-
-
-//
-
-//        if (up) {
-//            dy -= acceleration;
-//            if (dy < -maxSpeed) {
-//                dy = -maxSpeed;
-//            }
-//        } else {
-//            if (dy < 0) {
-//                dy += decelleration;
-//                if (dy > 0) {
-//                    dy = 0;
-//                }
-//            }
-//        }
-//        if (down) {
-//            dy += acceleration;
-//            if (dy > maxSpeed) {
-//                dy = maxSpeed;
-//            }
-//        } else {
-//            if (dy > 0) {
-//                dy -= decelleration;
-//                if (dy < 0) {
-//                    dy = 0;
-//                }
-//            }
-//        }
-//        if (left) {
-//            dx -= acceleration;
-//            if (dx < -maxSpeed) {
-//                dx = -maxSpeed;
-//            }
-//        } else {
-//            if (dx < 0) {
-//                dx += decelleration;
-//                if (dx > 0) {
-//                    dx = 0;
-//                }
-//            }
-//        }
-//        if (right) {
-//            dx += acceleration;
-//            if (dx > maxSpeed) {
-//                dx = maxSpeed;
-//            }
-//        } else {
-//            if (dx > 0) {
-//                dx -= decelleration;
-//                if (dx < 0) {
-//                    dx = 0;
-//                }
-//            }
-//        }
-
+        dx += tvConstant * dx;
+        dy += tvConstant * dy;
 
     }
-
-
     private void resetPosition() {
         System.out.println("Reseting Player... ");
         pos.x = GamePanel.width / 2 - 32;
@@ -166,6 +102,7 @@ public class Player extends Entity {
                 dy = 0;
                 fallen = false;
                 manageLives(-1);
+                System.out.println("fallen");
             }
         }
     }
@@ -181,7 +118,7 @@ public class Player extends Entity {
 
         g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
 
-        //lives.drawHearts(g, LIVES);
+        lives.drawHearts(g, (int)Math.round(LIVES));
     }
 
 

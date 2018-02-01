@@ -20,7 +20,7 @@ public class Enemy extends Entity {
 
 
     public Enemy(Sprite sprite, Vector2f orgin, int size) {
-        super(sprite, orgin, size);
+        super(sprite, orgin, size, false);
         acceleration = 1.5f;
 //        decelleration = 1.5f;
 //        maxSpeed = 3f;
@@ -90,19 +90,18 @@ public class Enemy extends Entity {
             pos.y -= s*vectory;
         }
         if(getDistanceTo(player) <= 20) {
-            if (System.currentTimeMillis() - attackTurn >= GamePanel.oldFrameCount * 100) {
-                attack = true;
-                if(attack == true){
-                    player.manageLives(-0.5);
-                }
-
-                attackTurn = System.currentTimeMillis();
+//            if (System.currentTimeMillis() - attackTurn >= GamePanel.oldFrameCount * 100) {
+//                attack = true;
+//                if(attack == true){
+//                    player.manageLives(-0.5);
+//                }
+//
+//                attackTurn = System.currentTimeMillis();
+            player.manageLives(-.5);
 
             }
         }
 
-
-    }
 
     public void update(Entity player, int radius){
         super.update();

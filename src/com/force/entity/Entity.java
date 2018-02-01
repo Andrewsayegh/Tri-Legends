@@ -1,5 +1,6 @@
 package com.force.entity;
 
+import com.force.GamePanel;
 import com.force.graphics.Animation;
 import com.force.graphics.Lives;
 import com.force.graphics.Sprite;
@@ -19,6 +20,9 @@ public abstract class Entity {
     protected final int SPECIAL = 6;
     protected double LIVES = 3;
     protected int currentAnimation;
+    protected boolean invincibility;
+    protected long invincibilityCounter;
+    protected boolean hasInvincibility;
 
     protected Animation animate;
     protected Lives lives;
@@ -53,7 +57,7 @@ public abstract class Entity {
     protected TileCollision tc;
 
 
-    public Entity(Sprite sprite, Vector2f orgin, int size) {
+    public Entity(Sprite sprite, Vector2f orgin, int size, boolean hasInvincibility) {
         this.sprite = sprite;
         pos = orgin;
         this.size = size;
@@ -67,6 +71,9 @@ public abstract class Entity {
         tc = new TileCollision(this);
 
         lives = new Lives();
+
+        invincibility = false;
+        this.hasInvincibility = hasInvincibility;
 
     }
 
@@ -161,18 +168,34 @@ public abstract class Entity {
     public void update() {
         animate();
         setHitBoxDirection();
+        manageInvincibility(150);
         animate.update();
     }
 
     public abstract void render(Graphics2D g);
 
     public void manageLives(double num) {
-        LIVES += num;
+        if(num < 0 && !invincibility && hasInvincibility){
+            LIVES += num;
+            invincibility = true;
+            invincibilityCounter = System.currentTimeMillis();
+        }
+
     }
 
     public boolean isDead() {
         if(LIVES <= 0)
             return true;
         return false;
+    }
+
+    public void manageInvincibility(int count) {
+        if (invincibility){
+            System.out.println(System.currentTimeMillis() - invincibilityCounter + " count");
+            System.out.println(GamePanel.oldFrameCount*count + " frame count");
+            if(System.currentTimeMillis() - invincibilityCounter>= GamePanel.oldFrameCount*count){
+                invincibility = false;
+            }
+        }
     }
 }
