@@ -118,7 +118,7 @@ public class Player extends Entity {
 
         g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
 
-        lives.drawHearts(g, (int)Math.round(LIVES));
+        lives.drawHearts(g, LIVES);
     }
 
 

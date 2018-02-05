@@ -191,8 +191,6 @@ public abstract class Entity {
 
     public void manageInvincibility(int count) {
         if (invincibility){
-            System.out.println(System.currentTimeMillis() - invincibilityCounter + " count");
-            System.out.println(GamePanel.oldFrameCount*count + " frame count");
             if(System.currentTimeMillis() - invincibilityCounter>= GamePanel.oldFrameCount*count){
                 invincibility = false;
             }
