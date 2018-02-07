@@ -8,13 +8,13 @@ import com.force.util.KeyHandler;
 import com.force.util.MouseHandler;
 import com.force.util.Vector2f;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
+import java.awt.Color;
 
 public class Player extends Entity {
 
     public Player(Sprite sprite, Vector2f orgin, int size) {
-        super(sprite, orgin, size, true);
+        super(sprite, orgin, size);
 //
         acceleration = 4f;
         tvConstant = -.5f;
@@ -22,20 +22,6 @@ public class Player extends Entity {
         bounds.setHeight(20);
         bounds.setXOffset(10);
         bounds.setYOffset(40);
-
-        Sprite temp = new Sprite("entity/linkFormatted.png");
-        BufferedImage[] imgs = temp.getSpriteArray(0);
-
-        BufferedImage image = animate.getImage();
-        int width = image.getWidth();
-        int height = image.getHeight();
-        int[][] result = new int[height][width];
-
-        for (int row = 0; row < height; row++) {
-            for (int col = 0; col < width; col++) {
-
-            }
-        }
     }
 
     //yeyeye
@@ -128,15 +114,9 @@ public class Player extends Entity {
             g.drawRect((int) (hitBounds.getPos().getWorldVar().x + hitBounds.getXOffset()), (int) (hitBounds.getPos().getWorldVar().y + hitBounds.getYOffset()), (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
         }
 
-        if (invincibility) {
-            BufferedImage image = animate.getImage();
-            Graphics2D g2 = (Graphics2D) image.createGraphics();
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
-            g2.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
-        }
-        else
-            g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
-            lives.drawHearts(g, LIVES);
+        g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
+
+        lives.drawHearts(g, LIVES);
     }
 
 

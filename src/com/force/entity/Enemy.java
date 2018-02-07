@@ -29,6 +29,7 @@ public class Enemy extends Entity {
         bounds.setHeight(20);
         bounds.setXOffset(12);
         bounds.setYOffset(40);
+        setLives(3);
 
 
     }
@@ -89,15 +90,16 @@ public class Enemy extends Entity {
             pos.x -= s*vectorx;
             pos.y -= s*vectory;
         }
-        if(getDistanceTo(player) <= 20) {
-//            if (System.currentTimeMillis() - attackTurn >= GamePanel.oldFrameCount * 100) {
-//                attack = true;
-//                if(attack == true){
-//                    player.manageLives(-0.5);
-//                }
-//
-//                attackTurn = System.currentTimeMillis();
-            player.manageLives(-.5);
+
+        if(getDistanceTo(player) <= 10) {
+            if (System.currentTimeMillis() - attackTurn >= GamePanel.oldFrameCount * 100) {
+                attack = true;
+                if(attack == true){
+                    player.manageLives(-0.5);
+                    //attack = false;
+                }
+
+                attackTurn = System.currentTimeMillis();
 
             }
         }
