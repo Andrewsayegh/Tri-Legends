@@ -18,6 +18,7 @@ public abstract class Entity {
     protected final int ATTACK = 5;
     protected final int SPECIAL = 6;
     protected double LIVES = 3;
+
     protected int currentAnimation;
 
     protected Animation animate;
@@ -49,13 +50,15 @@ public abstract class Entity {
 
     protected AABB hitBounds;
     protected AABB bounds;
+    protected Rectangle attackbox = null;
+
 
     protected TileCollision tc;
 
 
     public Entity(Sprite sprite, Vector2f orgin, int size) {
         this.sprite = sprite;
-        pos = orgin;
+        pos = orgin;  //new ?
         this.size = size;
 
         bounds = new AABB(orgin, size, size);
@@ -98,6 +101,10 @@ public abstract class Entity {
             if (currentAnimation != FALLEN || animate.getDelay() == -1) {
                 setAnimation(FALLEN, sprite.getSpriteArray(FALLEN), 15);
             }
+//        } else if (attack){
+//            if(currentAnimation != ATTACK || animate.getDelay() == -1) {
+//                setAnimation(ATTACK, sprite.getSpriteArray(ATTACK),5);
+//            }
         } else {
             setAnimation(currentAnimation, sprite.getSpriteArray(currentAnimation), -1);
         }
@@ -157,6 +164,40 @@ public abstract class Entity {
             hitBounds.setYOffset(0);
         }
     }
+    public Rectangle attackbox(){
+
+        //Rectangle attackbox = null;
+
+        if(dir == (float)(Math.PI/2)){
+            attackbox = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y), 50, 30);
+        }
+        if(dir == (float)0){
+            attackbox = new Rectangle((int) (pos.getWorldVar().x) + 60, (int) (pos.getWorldVar().y + 22), 30, 50);
+
+        }
+        if(dir == (float)Math.PI){
+            attackbox = new Rectangle((int) (pos.getWorldVar().x) - 27, (int) (pos.getWorldVar().y + 22), 30, 50);
+
+        }
+        if(dir == -(float)(Math.PI)/2){
+            attackbox = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y) + 70, 50, 30);
+        }
+        if(dir == (float)(Math.PI)/4){
+            attackbox = new Rectangle((int) (pos.getWorldVar().x) + 35, (int) (pos.getWorldVar().y) - 5, 39, 39);
+        }
+        if(dir == -(float)(Math.PI)/4){
+            attackbox = new Rectangle((int) (pos.getWorldVar().x) + 35, (int) (pos.getWorldVar().y) + 66, 39, 39);
+        }
+//        if(dir == (float)3*(Math.PI)/4){
+//            attackbox = new Rectangle((int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y) + 20, 50, 30);
+//        }
+//        if(dir == -(float)3*(Math.PI)/4){
+//            attackbox = new Rectangle((int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y) + 20, 50, 30);
+//        }
+//        Rectangle.Float attackbox = new Rectangle.Float(pos.x, pos.y, 50, 30);  //FIX INSTANCE FIELDS?
+        //System.out.println(attackbox);
+        return attackbox;
+    }
 
     public void update() {
         animate();
@@ -175,4 +216,18 @@ public abstract class Entity {
             return true;
         return false;
     }
+    public float getDistanceTo(Entity x1, Entity x2){
+        return (float)(Math.sqrt(((x1.pos.x - x2.pos.x)*(x1.pos.x - x2.pos.x)) + ((x1.pos.y - x2.pos.y)*(x1.pos.y - x2.pos.y))));
+    }
+    public void setLives(int lives){
+        LIVES = lives;
+    }
+//    public boolean intersects(Rectangle box){
+//        float ax = ((pos.getWorldVar().x);
+//        float ay = ((pos.getWorldVar().y);
+//        float bx = (attackbox.pos.getWorldVar().x);
+//        float by = (attackbox.pos.getWorldVar().y);
+//
+//
+//    }
 }

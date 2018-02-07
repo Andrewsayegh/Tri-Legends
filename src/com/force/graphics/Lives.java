@@ -23,7 +23,7 @@ public class Lives {
             e.printStackTrace();}
     }
 
-    public void drawHearts(Graphics2D g2, int lives){
+    public void drawHearts(Graphics2D g2, double lives){
         for (int i = 0; i < 3; i++) {
             if(i < lives)
                 g2.drawImage(heart, 30*i + 30, 50, null);

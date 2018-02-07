@@ -8,16 +8,14 @@ import com.force.util.KeyHandler;
 import com.force.util.MouseHandler;
 import com.force.util.Vector2f;
 
-import java.awt.Graphics2D;
-import java.awt.Color;
+import java.awt.*;
 
 public class Player extends Entity {
+    protected Rectangle rect;
 
     public Player(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size);
-//        acceleration = 1.5f;
-//        decelleration = 1.5f;
-//        maxSpeed = 3f;
+//
         acceleration = 4f;
         tvConstant = -.5f;
         bounds.setWidth(42);
@@ -26,7 +24,7 @@ public class Player extends Entity {
         bounds.setYOffset(40);
     }
 
-    public void move() {
+    public void move(Entity enemy) {
         // TODO: 12/19/17 Fix this:
 
         if (up){
@@ -64,70 +62,13 @@ public class Player extends Entity {
             dy -= acceleration*Math.sin(dir);
         }
 
+
+
+        System.out.println(dir);
+
         dx += tvConstant*dx;
         dy += tvConstant*dy;
 
-
-
-//        System.out.println(dy + " dy");
-//        System.out.println(dx + " dx");
-
-
-
-//
-
-//        if (up) {
-//            dy -= acceleration;
-//            if (dy < -maxSpeed) {
-//                dy = -maxSpeed;
-//            }
-//        } else {
-//            if (dy < 0) {
-//                dy += decelleration;
-//                if (dy > 0) {
-//                    dy = 0;
-//                }
-//            }
-//        }
-//        if (down) {
-//            dy += acceleration;
-//            if (dy > maxSpeed) {
-//                dy = maxSpeed;
-//            }
-//        } else {
-//            if (dy > 0) {
-//                dy -= decelleration;
-//                if (dy < 0) {
-//                    dy = 0;
-//                }
-//            }
-//        }
-//        if (left) {
-//            dx -= acceleration;
-//            if (dx < -maxSpeed) {
-//                dx = -maxSpeed;
-//            }
-//        } else {
-//            if (dx < 0) {
-//                dx += decelleration;
-//                if (dx > 0) {
-//                    dx = 0;
-//                }
-//            }
-//        }
-//        if (right) {
-//            dx += acceleration;
-//            if (dx > maxSpeed) {
-//                dx = maxSpeed;
-//            }
-//        } else {
-//            if (dx > 0) {
-//                dx -= decelleration;
-//                if (dx < 0) {
-//                    dx = 0;
-//                }
-//            }
-//        }
 
 
     }
@@ -145,12 +86,13 @@ public class Player extends Entity {
 
     }
 
-    public void update() {
+    public void update(Entity enemy) {
         super.update();
 
 
         if(!fallen) {
-            move();
+
+            move(enemy);
             if(!tc.collisionTile(dx, 0)) {
                 PlayState.map.x += dx;
                 pos.x += dx;
@@ -170,18 +112,21 @@ public class Player extends Entity {
         }
     }
 
+
     public void render(Graphics2D g) {
         g.setColor(Color.green);
         g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
 
         if(attack) {
             g.setColor(Color.red);
-            g.drawRect((int) (hitBounds.getPos().getWorldVar().x + hitBounds.getXOffset()), (int) (hitBounds.getPos().getWorldVar().y + hitBounds.getYOffset()), (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
+
+          if(attackbox() != null)
+              g.draw(attackbox());
         }
 
         g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
 
-        //lives.drawHearts(g, LIVES);
+        lives.drawHearts(g, LIVES);
     }
 
 

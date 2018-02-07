@@ -39,8 +39,9 @@ public class PlayState extends GameState {
         if(player.isDead())
             gsm.setState(3);
         else {
-            player.update();
+            player.update(guard1);
             guard1.update(player, 300);
+
         }
     }
 
@@ -60,4 +61,6 @@ public class PlayState extends GameState {
         player.render(g);
         guard1.render(g);
     }
+
 }
+
