@@ -14,7 +14,7 @@ import java.awt.Color;
 public class Player extends Entity {
 
     public Player(Sprite sprite, Vector2f orgin, int size) {
-        super(sprite, orgin, size);
+        super(sprite, orgin, size, true);
 //
         acceleration = 4f;
         tvConstant = -.5f;
