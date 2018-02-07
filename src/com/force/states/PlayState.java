@@ -37,7 +37,7 @@ public class PlayState extends GameState {
     public void update() {
         Vector2f.setWorldVar(map.x, map.y);
         if(player.isDead())
-            gsm.setState(3);
+            gsm.setState(GameStateManager.GAMEOVER);
         else {
             player.update(guard1);
             guard1.update(player, 300);

@@ -27,41 +27,43 @@ public class Player extends Entity {
     public void move(Entity enemy) {
         // TODO: 12/19/17 Fix this:
 
-        if (up){
-            dir = (float)(Math.PI/2);
-            if(right)
-                dir -= (float)(Math.PI/4);
+        if (up) {
+            dir = (float) (Math.PI / 2);
+            if (right)
+                dir -= (float) (Math.PI / 4);
             if (left)
-                dir += (float)(Math.PI/4);
+                dir += (float) (Math.PI / 4);
 
-            dx += acceleration*Math.cos(dir);
-            dy -= acceleration*Math.sin(dir);
+            dx += acceleration * Math.cos(dir);
+            dy -= acceleration * Math.sin(dir);
         }
 
-        if (down){
-            dir = (float)(-Math.PI/2);
-            if(right)
-                dir += (float)(Math.PI/4);
+        if (down) {
+            dir = (float) (-Math.PI / 2);
+            if (right)
+                dir += (float) (Math.PI / 4);
             if (left)
-                dir -= (float)(Math.PI/4);
+                dir -= (float) (Math.PI / 4);
 
-            dx += acceleration*Math.cos(dir);
-            dy -= acceleration*Math.sin(dir);
+            dx += acceleration * Math.cos(dir);
+            dy -= acceleration * Math.sin(dir);
         }
 
-        if (left && !(down || up)){
-            dir = (float)(Math.PI);
+        if (left && !(down || up)) {
+            dir = (float) (Math.PI);
 
-            dx += acceleration*Math.cos(dir);
-            dy -= acceleration*Math.sin(dir);
+            dx += acceleration * Math.cos(dir);
+            dy -= acceleration * Math.sin(dir);
         }
-        if (right && !(down || up)){
+        if (right && !(down || up)) {
             dir = 0;
 
-            dx += acceleration*Math.cos(dir);
-            dy -= acceleration*Math.sin(dir);
+            dx += acceleration * Math.cos(dir);
+            dy -= acceleration * Math.sin(dir);
         }
 
+        dx += tvConstant * dx;
+        dy += tvConstant * dy;
 
 
         System.out.println(dir);
@@ -108,6 +110,7 @@ public class Player extends Entity {
                 dy = 0;
                 fallen = false;
                 manageLives(-1);
+                System.out.println("fallen");
             }
         }
     }

@@ -20,7 +20,7 @@ public class Enemy extends Entity {
 
 
     public Enemy(Sprite sprite, Vector2f orgin, int size) {
-        super(sprite, orgin, size);
+        super(sprite, orgin, size, false);
         acceleration = 1.5f;
 //        decelleration = 1.5f;
 //        maxSpeed = 3f;
@@ -104,8 +104,6 @@ public class Enemy extends Entity {
             }
         }
 
-
-    }
 
     public void update(Entity player, int radius){
         super.update();
