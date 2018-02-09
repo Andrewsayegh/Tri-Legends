@@ -68,8 +68,14 @@ public class AABB { // Stands for Axis-Aligned Bounding Box
     public void setYOffset(float yOffset) {
         this.yOffset = yOffset;
     }
-    public float getXOffset() { return xOffset; }
-    public float getYOffset() { return yOffset; }
+
+    public float getXOffset() {
+        return xOffset;
+    }
+
+    public float getYOffset() {
+        return yOffset;
+    }
 
     public void setWidth(float width) {
         this.width = width;
@@ -93,7 +99,7 @@ public class AABB { // Stands for Axis-Aligned Bounding Box
         return false;
     }
 
-    public boolean colCircleBox(AABB aBox){
+    public boolean colCircleBox(AABB aBox) {
 
         float cx = (float) (pos.getWorldVar().x + radius / Math.sqrt(2) - entity.getSize() / Math.sqrt(2));
         float cy = (float) (pos.getWorldVar().y + radius / Math.sqrt(2) - entity.getSize() / Math.sqrt(2));
@@ -101,7 +107,7 @@ public class AABB { // Stands for Axis-Aligned Bounding Box
         float xDelta = cx - Math.max(aBox.pos.getWorldVar().x + (aBox.getWidth() / 2), Math.min(cx, aBox.pos.getWorldVar().x));
         float yDelta = cy - Math.max(aBox.pos.getWorldVar().y + (aBox.getWidth() / 2), Math.min(cy, aBox.pos.getWorldVar().y));
 
-        if ((xDelta * xDelta + yDelta * yDelta) < ((this.radius / Math.sqrt(2)) * (this.radius / Math.sqrt(2)))){
+        if ((xDelta * xDelta + yDelta * yDelta) < ((this.radius / Math.sqrt(2)) * (this.radius / Math.sqrt(2)))) {
             return true;
         }
         return false;

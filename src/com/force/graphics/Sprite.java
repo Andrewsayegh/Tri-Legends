@@ -44,26 +44,21 @@ public class Sprite {
         loadSpriteArray();
     }
 
-
     public void setSize(int width, int height) {
         setWidth(width);
         setHeight(height);
     }
-
     public void setWidth(int width) {
         this.width = width;
         wSprite = SPRITESHEET.getWidth() / width;
     }
-
     public void setHeight(int height) {
         this.height = height;
         hSprite = SPRITESHEET.getHeight() / height;
     }
-
     public int getWidth() {
         return width;
     }
-
     public int getHeight() {
         return height;
     }
@@ -91,7 +86,6 @@ public class Sprite {
     public BufferedImage getSpriteSheet() {
         return SPRITESHEET;
     }
-
     public BufferedImage getSprite(int x, int y) {
         return SPRITESHEET.getSubimage(x * width, y * height, width, height);
     }
@@ -99,20 +93,16 @@ public class Sprite {
     public BufferedImage[] getSpriteArray(int i) {
         return spriteArray[i];
     }
-
     public BufferedImage[][] getSpriteArray() {
         return spriteArray;
     }
-
 
     public static void drawArray(Graphics2D g, ArrayList<BufferedImage> img, Vector2f pos, int width, int height, int xOffset, int yOffset) {
         float x = pos.x;
         float y = pos.y;
 
-        for (int i = 0; i < img.size(); i++) {
-            if (img.get(i) != null) {
-                g.drawImage(img.get(i), (int) x, (int) y, width, height, null);
-            }
+        for (BufferedImage image: img){
+            if (image != null) g.drawImage(image, (int) x, (int) y, width, height, null);
             x += xOffset;
             y += yOffset;
         }
@@ -121,19 +111,15 @@ public class Sprite {
     public static void drawArray(Graphics2D g, String word, Vector2f pos, int size) {
         drawArray(g, currentFont, word, pos, size, size, size, 0);
     }
-
     public static void drawArray(Graphics2D g, String word, Vector2f pos, int size, int xOffset) {
         drawArray(g, currentFont, word, pos, size, size, xOffset, 0);
     }
-
     public static void drawArray(Graphics2D g, String word, Vector2f pos, int width, int height, int xOffset) {
         drawArray(g, currentFont, word, pos, width, height, xOffset, 0);
     }
-
     public static void drawArray(Graphics2D g, Font f, String word, Vector2f pos, int size, int xOffset) {
         drawArray(g, f, word, pos, size, size, xOffset, 0);
     }
-
     public static void drawArray(Graphics2D g, Font font, String word, Vector2f pos, int width, int height, int xOffset, int yOffset) {
         float x = pos.x;
         float y = pos.y;
@@ -147,8 +133,8 @@ public class Sprite {
             x += xOffset;
             y += yOffset;
         }
-
     }
+
 }
 
 

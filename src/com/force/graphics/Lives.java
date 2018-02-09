@@ -10,34 +10,34 @@ import java.io.IOException;
 /**
  * Created by student on 1/2/18.
  */
+
 public class Lives {
 
-    private BufferedImage heart, emptyHeart;
+    private BufferedImage halfHeart, emptyHeart;
 
     public Lives() {
         try {
-//            heart = ImageIO.read(new File("res/entity/heart.png"));
-            heart = ImageIO.read(new File("res/entity/half heart.png"));
-            //emptyHeart = ImageIO.read(new File("res/entity/emptyheart.png"));
+            halfHeart = ImageIO.read(new File("res/entity/heart/halfheart.png"));
+            emptyHeart = ImageIO.read(new File("res/entity/heart/emptyheart.png"));
         } catch (IOException e) {
-            System.out.println("heart failure");
-            e.printStackTrace();}
+            System.out.println("ERROR: Failure uploading heart images");
+            e.printStackTrace();
+        }
     }
 
-    public void drawHearts(Graphics2D g2, double lives){
-//        for (int i = 0; i < 3; i++) {
-//            if(i < lives)
-//                g2.drawImage(heart, 30*i + 30, 50, null);
-//            else
-//                g2.drawImage(emptyHeart, 30*i + 30, 50, null);
-//        }
+    public void drawHearts(Graphics2D g2, double lives) {
 
-        for (int i = 0; i < lives*2; i++) {
-            if (i%2 == 0){
-                g2.drawImage(heart, 15*i + 30, 50, 11, 19, null);
-            }
-            else{
-                g2.drawImage(heart, 15*i + 7 + 30, 50, -11, 19, null);
+        // Draws empty heart containers
+        for (int i = 0; i < 6; i += 2) {
+            g2.drawImage(emptyHeart, 32 + (16 * i), 50, emptyHeart.getWidth(), emptyHeart.getHeight(), null);
+        }
+
+        // Draws half hearts accordingly to screen
+        for (int i = 0; i < lives * 2; i++) {
+            if (i % 2 == 0) {
+                g2.drawImage(halfHeart, 32 + (16 * i), 50, halfHeart.getWidth(), halfHeart.getHeight(), null);
+            } else {
+                g2.drawImage(halfHeart, 48 + (16 * i), 50, -halfHeart.getWidth(), halfHeart.getHeight(), null);
             }
         }
     }

@@ -4,9 +4,12 @@ import com.force.GamePanel;
 import com.force.graphics.Animation;
 import com.force.graphics.Lives;
 import com.force.graphics.Sprite;
-import com.force.util.*;
+import com.force.util.AABB;
+import com.force.util.TileCollision;
+import com.force.util.Vector2f;
 
-import java.awt.*;
+import java.awt.Rectangle;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity {
@@ -44,10 +47,6 @@ public abstract class Entity {
     protected float dx;
     protected float dy;
 
-//    protected float maxSpeed = 3f;
-//    protected float acceleration = 2f;
-//    protected float decelleration = 0.3f;
-
     protected float acceleration;
     protected float tvConstant;
     protected float dir;
@@ -72,14 +71,11 @@ public abstract class Entity {
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
 
         tc = new TileCollision(this);
-
         lives = new Lives();
 
         invincibility = false;
         this.hasInvincibility = hasInvincibility;
-
     }
-
 
     public void setAnimation(int i, BufferedImage[] frames, int delay) {
         currentAnimation = i;
@@ -129,18 +125,6 @@ public abstract class Entity {
         this.size = size;
     }
 
-//    public void setMaxSpeed(float maxSpeed) {
-//        this.maxSpeed = maxSpeed;
-//    }
-//
-//    public void setAcceleration(float acceleration) {
-//        this.acceleration = acceleration;
-//    }
-//
-//    public void setDecelleration(float decelleration) {
-//        this.decelleration = decelleration;
-//    }
-
     public AABB getBounds() {
         return bounds;
     }
@@ -154,19 +138,16 @@ public abstract class Entity {
     }
 
     private void setHitBoxDirection() {
-        if(up) {
+        if (up) {
             hitBounds.setYOffset(-size / 2);
             hitBounds.setXOffset(0);
-        }
-        else if(down) {
+        } else if (down) {
             hitBounds.setYOffset(size / 2);
             hitBounds.setXOffset(0);
-        }
-        else if(left) {
+        } else if (left) {
             hitBounds.setXOffset(-size / 2);
             hitBounds.setYOffset(0);
-        }
-        else if(right) {
+        } else if (right) {
             hitBounds.setXOffset(size / 2);
             hitBounds.setYOffset(0);
         }
@@ -209,23 +190,22 @@ public abstract class Entity {
     public void update() {
         animate();
         setHitBoxDirection();
-        manageInvincibility(150);
+        manageInvincibility(100);
         animate.update();
     }
 
     public abstract void render(Graphics2D g);
 
     public void manageLives(double num) {
-        if(num < 0 && !invincibility && hasInvincibility){
+        if (num < 0 && !invincibility && hasInvincibility) {
             LIVES += num;
             invincibility = true;
             invincibilityCounter = System.currentTimeMillis();
         }
-
     }
 
     public boolean isDead() {
-        if(LIVES <= 0)
+        if (LIVES <= 0)
             return true;
         return false;
     }
@@ -247,8 +227,8 @@ public abstract class Entity {
 //    }
 
     public void manageInvincibility(int count) {
-        if (invincibility){
-            if(System.currentTimeMillis() - invincibilityCounter>= GamePanel.oldFrameCount*count){
+        if (invincibility) {
+            if (System.currentTimeMillis() - invincibilityCounter >= GamePanel.oldFrameCount * count) {
                 invincibility = false;
             }
         }

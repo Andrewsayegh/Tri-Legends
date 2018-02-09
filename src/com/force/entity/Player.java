@@ -15,7 +15,6 @@ public class Player extends Entity {
 
     public Player(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size, true);
-//
         acceleration = 4f;
         tvConstant = -.5f;
         bounds.setWidth(42);
@@ -23,8 +22,6 @@ public class Player extends Entity {
         bounds.setXOffset(10);
         bounds.setYOffset(40);
     }
-
-    //yeyeye
 
     public void move() {
 

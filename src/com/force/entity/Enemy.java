@@ -6,7 +6,6 @@ import com.force.states.PlayState;
 import com.force.util.Vector2f;
 
 import java.awt.*;
-import java.util.Vector;
 
 /**
  * Created by student on 12/20/17.
@@ -18,12 +17,9 @@ public class Enemy extends Entity {
     public long attackTurn = System.currentTimeMillis();
 
 
-
     public Enemy(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size, false);
         acceleration = 1.5f;
-//        decelleration = 1.5f;
-//        maxSpeed = 3f;
 
         bounds.setWidth(42);
         bounds.setHeight(20);
@@ -38,12 +34,11 @@ public class Enemy extends Entity {
         g.setColor(Color.blue);
         g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
         g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
-
     }
 
     public void move() {
         int rand = (int) (Math.random() * 4);
-        if (System.currentTimeMillis() - moveTurn >= GamePanel.oldFrameCount*150) {
+        if (System.currentTimeMillis() - moveTurn >= GamePanel.oldFrameCount * 150) {
 
 
             if (rand == 0) {
@@ -82,35 +77,34 @@ public class Enemy extends Entity {
     }
 
 
-    public void move2(Entity player){
-        if(getDistanceTo(player) != 0) {
+    public void move2(Entity player) {
+        if (getDistanceTo(player) != 0) {
             float vectorx = (this.pos.x - player.pos.x) / getDistanceTo(player);
             float vectory = (this.pos.y - player.pos.y) / getDistanceTo(player);
 
-            pos.x -= s*vectorx;
-            pos.y -= s*vectory;
+            pos.x -= s * vectorx;
+            pos.y -= s * vectory;
         }
 
-        if(getDistanceTo(player) <= 10) {
+        if (getDistanceTo(player) <= 10) {
             if (System.currentTimeMillis() - attackTurn >= GamePanel.oldFrameCount * 100) {
                 attack = true;
-                if(attack == true){
+                if (attack == true) {
                     player.manageLives(-0.5);
-                    //attack = false;
                 }
-
                 attackTurn = System.currentTimeMillis();
 
             }
         }
+    }
 
 
-    public void update(Entity player, int radius){
+    public void update(Entity player, int radius) {
         super.update();
-        if(LIVES > 0) {
-            if(getDistanceTo(player) >= radius) {
+        if (LIVES > 0) {
+            if (getDistanceTo(player) >= radius) {
                 move();
-            }else if(getDistanceTo(player) <= radius){
+            } else if (getDistanceTo(player) <= radius) {
                 move2(player);
             }
 
@@ -123,7 +117,7 @@ public class Enemy extends Entity {
                 pos.y += dy;
             }
         } else {
-            if(animate.hasPlayedOnce()) {
+            if (animate.hasPlayedOnce()) {
                 //resetPosition();
                 dx = 0;
                 dy = 0;
@@ -133,8 +127,10 @@ public class Enemy extends Entity {
         }
     }
 
-    public float getDistanceTo(Entity player){
-        return (float)(Math.sqrt(((this.pos.x - player.pos.x)*(this.pos.x - player.pos.x)) + ((this.pos.y - player.pos.y)*(this.pos.y - player.pos.y))));
+    public float getDistanceTo(Entity player) {
+        return (float) (Math.sqrt(((this.pos.x - player.pos.x) * (this.pos.x - player.pos.x)) + ((this.pos.y - player.pos.y) * (this.pos.y - player.pos.y))));
+
     }
+
 
 }

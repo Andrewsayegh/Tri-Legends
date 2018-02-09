@@ -5,9 +5,10 @@ import com.force.util.KeyHandler;
 import com.force.util.MouseHandler;
 
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-
 
 
 public class GamePanel extends JPanel implements Runnable {
@@ -101,13 +102,12 @@ public class GamePanel extends JPanel implements Runnable {
             lastRenderTime = now;
             frameCount++;
 
-
             int thisSecond = (int) (lastUpdateTime / 1000000000);
             if (thisSecond > lastSecondTime) {
                 if (frameCount != oldFrameCount) {
                     oldFrameCount = frameCount;
                 }
-                if(tickCount != oldTickCount) {
+                if (tickCount != oldTickCount) {
                     oldTickCount = tickCount;
                 }
                 tickCount = 0;
@@ -120,7 +120,7 @@ public class GamePanel extends JPanel implements Runnable {
                 try {
                     thread.sleep(1);
                 } catch (Exception e) {
-                    System.out.println("ERROR: yielding thread");
+                    System.out.println("ERROR: Yielding thread");
                 }
                 now = System.nanoTime();
             }

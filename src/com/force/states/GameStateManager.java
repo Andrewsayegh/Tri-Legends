@@ -35,7 +35,7 @@ public class GameStateManager {
         pauseState = new PauseState(this);
         paused = false;
 
-        currentState = PLAY;
+        currentState = MENU;
         loadState(currentState);
 
     }
@@ -79,7 +79,8 @@ public class GameStateManager {
         }
         if (gameStates[currentState] != null) gameStates[currentState].update();
     }
-    public void input(MouseHandler mouse, KeyHandler key ){
+
+    public void input(MouseHandler mouse, KeyHandler key) {
         gameStates[currentState].input(mouse, key);
     }
 

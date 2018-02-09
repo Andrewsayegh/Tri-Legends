@@ -30,16 +30,16 @@ public class PlayState extends GameState {
         tm = new TileManager("tile/tilemap.xml");
         font = new Font("font/font.png", 10, 10);
 
-        player = new Player(new Sprite("entity/linkFormatted.png"), new Vector2f(0 + (GamePanel.width / 2) - 32, 0 + (GamePanel.height / 2) - 32), 64);
-        guard1 = new Enemy(new Sprite("entity/bat-spritesheet-calciumtrice.png"), new Vector2f(0 + 100, 0+ 100), 64);
+        player = new Player(new Sprite("entity/player/linkFormatted.png"), new Vector2f(0 + (GamePanel.width / 2) - 32, 0 + (GamePanel.height / 2) - 32), 64);
+        guard1 = new Enemy(new Sprite("entity/enemies/bat-spritesheet-calciumtrice.png"), new Vector2f(0 + 100, 0 + 100), 64);
     }
 
     public void update() {
         Vector2f.setWorldVar(map.x, map.y);
-        if(player.isDead())
+        if (player.isDead())
             gsm.setState(GameStateManager.GAMEOVER);
         else {
-            player.update(guard1);
+            player.update();
             guard1.update(player, 300);
 
         }
@@ -53,10 +53,6 @@ public class PlayState extends GameState {
         tm.render(g);
         String fps = GamePanel.oldFrameCount + " FPS";
         Sprite.drawArray(g, font, fps, new Vector2f(GamePanel.width - fps.length() * 32, 32), 32, 24);
-
-        // Not Needed
-//        String tps = GamePanel.oldTickCount + " TPS";
-//        Sprite.drawArray(g, tps, new Vector2f(GamePanel.width - tps.length() * 32, 64), 32, 24);
 
         player.render(g);
         guard1.render(g);

@@ -3,7 +3,7 @@ package com.force.states;
 import com.force.util.KeyHandler;
 import com.force.util.MouseHandler;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 
 public abstract class GameState {
 

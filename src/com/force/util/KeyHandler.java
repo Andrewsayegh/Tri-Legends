@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class
-KeyHandler implements KeyListener {
+public class KeyHandler implements KeyListener {
 
     public static List<Key> keys = new ArrayList<Key>();
 
@@ -67,7 +66,7 @@ KeyHandler implements KeyListener {
         }
     }
 
-    public void toggle(KeyEvent e, boolean pressed){
+    public void toggle(KeyEvent e, boolean pressed) {
         if (e.getKeyCode() == KeyEvent.VK_W) up.toggle(pressed);
         if (e.getKeyCode() == KeyEvent.VK_S) down.toggle(pressed);
         if (e.getKeyCode() == KeyEvent.VK_A) left.toggle(pressed);
