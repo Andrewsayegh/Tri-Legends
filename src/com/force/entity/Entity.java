@@ -176,6 +176,13 @@ public abstract class Entity {
         if(dir == -(float)(Math.PI)/4){
             attackbox = new Rectangle((int) (pos.getWorldVar().x) + 35, (int) (pos.getWorldVar().y) + 66, 39, 39);
         }
+        if(dir == (float)(3*Math.PI)/4){
+            attackbox = new Rectangle((int) (pos.getWorldVar().x) - 10, (int) (pos.getWorldVar().y) - 5, 39, 39);
+        }
+        if(dir == (float)(-3*Math.PI)/4){
+            attackbox = new Rectangle((int) (pos.getWorldVar().x) - 10, (int) (pos.getWorldVar().y) + 66, 39, 39);
+        }
+
 //        if(dir == (float)3*(Math.PI)/4){
 //            attackbox = new Rectangle((int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y) + 20, 50, 30);
 //        }

@@ -10,8 +10,11 @@ import com.force.util.Vector2f;
 
 import java.awt.Graphics2D;
 import java.awt.Color;
+import java.awt.Rectangle;
 
 public class Player extends Entity {
+
+    protected Rectangle rect;
 
     public Player(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size, true);
@@ -64,12 +67,13 @@ public class Player extends Entity {
         dy += tvConstant * dy;
 
     }
+
     private void resetPosition() {
         System.out.println("Reseting Player... ");
         pos.x = GamePanel.width / 2 - 32;
         PlayState.map.x = 0;
 
-        pos.y = GamePanel.height /2 - 32;
+        pos.y = GamePanel.height / 2 - 32;
         PlayState.map.y = 0;
 
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 8);
@@ -80,18 +84,18 @@ public class Player extends Entity {
         super.update();
 
 
-        if(!fallen) {
+        if (!fallen) {
             move();
-            if(!tc.collisionTile(dx, 0)) {
+            if (!tc.collisionTile(dx, 0)) {
                 PlayState.map.x += dx;
                 pos.x += dx;
             }
-            if(!tc.collisionTile(0, dy)) {
+            if (!tc.collisionTile(0, dy)) {
                 PlayState.map.y += dy;
                 pos.y += dy;
             }
         } else {
-            if(animate.hasPlayedOnce()) {
+            if (animate.hasPlayedOnce()) {
                 resetPosition();
                 dx = 0;
                 dy = 0;
@@ -106,9 +110,10 @@ public class Player extends Entity {
         g.setColor(Color.green);
         g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
 
-        if(attack) {
+        if (attack) {
+            rect = attackbox();
             g.setColor(Color.red);
-            g.drawRect((int) (hitBounds.getPos().getWorldVar().x + hitBounds.getXOffset()), (int) (hitBounds.getPos().getWorldVar().y + hitBounds.getYOffset()), (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
+            g.draw(rect);
         }
 
         g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
