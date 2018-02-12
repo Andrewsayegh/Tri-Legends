@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Sprite {
 
     private BufferedImage SPRITESHEET = null;
-    private BufferedImage[][] spriteArray, invincSpriteArray;
+    private BufferedImage[][] spriteArray;
     private final int TILE_SIZE = 32;
     public int width;
     public int height;

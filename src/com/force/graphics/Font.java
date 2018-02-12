@@ -37,7 +37,6 @@ public class Font {
         loadFontArray();
     }
 
-
     public void setSize(int width, int height) {
         setWidth(width);
         setHeight(height);
@@ -83,11 +82,9 @@ public class Font {
     public BufferedImage getFontSheet() {
         return FONTSHEET;
     }
-
     public BufferedImage getLetter(int x, int y) {
         return FONTSHEET.getSubimage(x * width, y * height, width, height);
     }
-
     public BufferedImage getFont(char letter) {
         int value = letter;
 

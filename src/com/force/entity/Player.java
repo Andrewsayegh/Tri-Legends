@@ -8,9 +8,8 @@ import com.force.util.KeyHandler;
 import com.force.util.MouseHandler;
 import com.force.util.Vector2f;
 
-import java.awt.Graphics2D;
-import java.awt.Color;
-import java.awt.Rectangle;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
 
@@ -115,9 +114,18 @@ public class Player extends Entity {
             g.setColor(Color.red);
             g.draw(rect);
         }
+        if (invincibility) {
+            BufferedImage image = animate.getImage();
+            Graphics2D g2 = image.createGraphics();
 
-        g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
+            AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
+            g2.setComposite(alcom);
+            g2.drawImage(image, (int) (pos.x), (int) (pos.y), size, size, null);
 
+            g2.dispose();
+        }
+        else
+            g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
         lives.drawHearts(g, LIVES);
     }
 

@@ -55,13 +55,11 @@ public abstract class Entity {
     protected AABB bounds;
     protected Rectangle attackbox = null;
 
-
     protected TileCollision tc;
-
 
     public Entity(Sprite sprite, Vector2f orgin, int size, boolean hasInvincibility) {
         this.sprite = sprite;
-        pos = orgin;  //new ?
+        pos = orgin;
         this.size = size;
 
         bounds = new AABB(orgin, size, size);
@@ -154,8 +152,6 @@ public abstract class Entity {
     }
     public Rectangle attackbox(){
 
-        //Rectangle attackbox = null;
-
         if(dir == (float)(Math.PI/2)){
             attackbox = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y), 50, 30);
         }
@@ -183,21 +179,13 @@ public abstract class Entity {
             attackbox = new Rectangle((int) (pos.getWorldVar().x) - 10, (int) (pos.getWorldVar().y) + 66, 39, 39);
         }
 
-//        if(dir == (float)3*(Math.PI)/4){
-//            attackbox = new Rectangle((int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y) + 20, 50, 30);
-//        }
-//        if(dir == -(float)3*(Math.PI)/4){
-//            attackbox = new Rectangle((int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y) + 20, 50, 30);
-//        }
-//        Rectangle.Float attackbox = new Rectangle.Float(pos.x, pos.y, 50, 30);  //FIX INSTANCE FIELDS?
-        //System.out.println(attackbox);
         return attackbox;
     }
 
     public void update() {
         animate();
         setHitBoxDirection();
-        manageInvincibility(100);
+        manageInvincibility(50); // -> long in frames
         animate.update();
     }
 
@@ -223,15 +211,6 @@ public abstract class Entity {
     public void setLives(int lives){
         LIVES = lives;
     }
-    // Still working on this
-//    public boolean intersects(Rectangle box){
-//        float ax = ((pos.getWorldVar().x);
-//        float ay = ((pos.getWorldVar().y);
-//        float bx = (attackbox.pos.getWorldVar().x);
-//        float by = (attackbox.pos.getWorldVar().y);
-//
-//
-//    }
 
     public void manageInvincibility(int count) {
         if (invincibility) {

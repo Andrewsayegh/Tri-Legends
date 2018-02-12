@@ -25,9 +25,7 @@ public class MenuState extends GameState {
         font = new Font("font/font.png", 10, 10);
     }
 
-    public void update() {
-
-    }
+    public void update() { }
 
     public void input(MouseHandler mouse, KeyHandler key) {
         if(key.enter.isDown) select();

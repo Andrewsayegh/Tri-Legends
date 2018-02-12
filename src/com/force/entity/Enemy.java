@@ -16,7 +16,6 @@ public class Enemy extends Entity {
     public long moveTurn = System.currentTimeMillis();
     public long attackTurn = System.currentTimeMillis();
 
-
     public Enemy(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size, false);
         acceleration = 1.5f;
@@ -26,8 +25,6 @@ public class Enemy extends Entity {
         bounds.setXOffset(12);
         bounds.setYOffset(40);
         setLives(3);
-
-
     }
 
     public void render(Graphics2D g) {
@@ -39,7 +36,6 @@ public class Enemy extends Entity {
     public void move() {
         int rand = (int) (Math.random() * 4);
         if (System.currentTimeMillis() - moveTurn >= GamePanel.oldFrameCount * 150) {
-
 
             if (rand == 0) {
                 up = true;
@@ -72,8 +68,6 @@ public class Enemy extends Entity {
             pos.x += -s;
         if (right)
             pos.x += s;
-
-
     }
 
 
@@ -128,9 +122,7 @@ public class Enemy extends Entity {
     }
 
     public float getDistanceTo(Entity player) {
-        return (float) (Math.sqrt(((this.pos.x - player.pos.x) * (this.pos.x - player.pos.x)) + ((this.pos.y - player.pos.y) * (this.pos.y - player.pos.y))));
-
+        return (float) (Math.sqrt(((this.pos.x - player.pos.x) * (this.pos.x - player.pos.x))
+                + ((this.pos.y - player.pos.y) * (this.pos.y - player.pos.y))));
     }
-
-
 }
