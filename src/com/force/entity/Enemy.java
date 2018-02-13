@@ -14,7 +14,6 @@ public class Enemy extends Entity {
     public int s = 3;
 
     public long moveTurn = System.currentTimeMillis();
-    public long attackTurn = System.currentTimeMillis();
 
     public Enemy(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size, false);
@@ -81,16 +80,13 @@ public class Enemy extends Entity {
         }
 
         if (getDistanceTo(player) <= 10) {
-            if (System.currentTimeMillis() - attackTurn >= GamePanel.oldFrameCount * 100) {
                 attack = true;
                 if (attack == true) {
                     player.manageLives(-0.5);
                 }
-                attackTurn = System.currentTimeMillis();
-
             }
         }
-    }
+
 
 
     public void update(Entity player, int radius) {

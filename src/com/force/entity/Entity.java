@@ -205,9 +205,9 @@ public abstract class Entity {
         return false;
     }
 
-    public float getDistanceTo(Entity x1, Entity x2){
-        return (float)(Math.sqrt(((x1.pos.x - x2.pos.x)*(x1.pos.x - x2.pos.x)) + ((x1.pos.y - x2.pos.y)*(x1.pos.y - x2.pos.y))));
-    }
+//    public float getDistanceTo(Entity x1, Entity x2){
+//        return (float)(Math.sqrt(((x1.pos.x - x2.pos.x)*(x1.pos.x - x2.pos.x)) + ((x1.pos.y - x2.pos.y)*(x1.pos.y - x2.pos.y))));
+//    }
     public void setLives(int lives){
         LIVES = lives;
     }

@@ -116,16 +116,16 @@ public class Player extends Entity {
         }
         if (invincibility) {
             BufferedImage image = animate.getImage();
-            Graphics2D g2 = image.createGraphics();
+            Composite oldC = g.getComposite();
 
-            AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
-            g2.setComposite(alcom);
-            g2.drawImage(image, (int) (pos.x), (int) (pos.y), size, size, null);
-
-            g2.dispose();
+            AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .3f);
+            g.setComposite(alcom);
+            g.drawImage(image, (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
+            g.setComposite(oldC);
         }
-        else
+        else {
             g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
+        }
         lives.drawHearts(g, LIVES);
     }
 
