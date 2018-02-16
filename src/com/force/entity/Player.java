@@ -27,39 +27,82 @@ public class Player extends Entity {
 
     public void move() {
 
-        if (up) {
-            dir = (float) (Math.PI / 2);
-            if (right)
-                dir -= (float) (Math.PI / 4);
-            if (left)
-                dir += (float) (Math.PI / 4);
-
-            dx += acceleration * Math.cos(dir);
-            dy -= acceleration * Math.sin(dir);
-        }
-
-        if (down) {
-            dir = (float) (-Math.PI / 2);
-            if (right)
-                dir += (float) (Math.PI / 4);
-            if (left)
-                dir -= (float) (Math.PI / 4);
-
-            dx += acceleration * Math.cos(dir);
-            dy -= acceleration * Math.sin(dir);
-        }
-
-        if (left && !(down || up)) {
-            dir = (float) (Math.PI);
-
-            dx += acceleration * Math.cos(dir);
-            dy -= acceleration * Math.sin(dir);
-        }
-        if (right && !(down || up)) {
+        if(!up && !down && !left && !right) {
+            firstPressed = 0;
             dir = 0;
+        }
 
-            dx += acceleration * Math.cos(dir);
-            dy -= acceleration * Math.sin(dir);
+
+        switch (dir) {
+            case 1: dy -= acceleration; //up
+                break;
+            case 2: dy += acceleration; //down
+                break;
+            case 3: dx -=acceleration; //left
+                break;
+            case 4: dx += acceleration; // right
+        }
+
+        if (up && firstPressed == 0) {
+            firstPressed = 1;
+//            dir = 1;
+        }
+        else if (firstPressed == 1 && !up){
+            firstPressed = 0;
+        }
+
+        if (down && firstPressed == 0) {
+            firstPressed = 2;
+//            dir = 2;
+        }
+        else if (firstPressed == 2 && !down){
+            firstPressed = 0;
+        }
+
+        if (left && firstPressed == 0) {
+            firstPressed = 3;
+//            dir = 3;
+        }
+        else if (firstPressed == 3 && !left){
+            firstPressed = 0;
+        }
+
+        if (right && firstPressed == 0) {
+            firstPressed = 4;
+//            dir = 4;
+        }
+        else if (firstPressed == 4 && !right){
+            firstPressed = 0;
+        }
+
+
+        if (firstPressed == 1){
+            dir = 1;
+            if (left)
+                dir = 3;
+            if (right)
+                dir = 4;
+        }
+        if (firstPressed == 2){
+            dir = 2;
+            if (left)
+                dir = 3;
+            if (right)
+                dir = 4;
+        }
+        if (firstPressed == 3){
+            dir = 3;
+            if (up)
+                dir = 1;
+            if (down)
+                dir = 2;
+        }
+        if (firstPressed == 4){
+            dir = 4;
+            if (up)
+                dir = 1;
+            if (down)
+                dir = 2;
         }
 
         dx += tvConstant * dx;

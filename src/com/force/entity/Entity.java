@@ -38,6 +38,7 @@ public abstract class Entity {
     protected boolean down;
     protected boolean right;
     protected boolean left;
+    protected int firstPressed;
     protected boolean attack;
     protected boolean special;
     protected boolean fallen;
@@ -49,7 +50,7 @@ public abstract class Entity {
 
     protected float acceleration;
     protected float tvConstant;
-    protected float dir;
+    protected int dir;
 
     protected AABB hitBounds;
     protected AABB bounds;
