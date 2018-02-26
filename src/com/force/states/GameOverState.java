@@ -15,7 +15,6 @@ public class GameOverState extends GameState {
 
     public GameOverState(GameStateManager gsm) {
         super(gsm);
-
         font = new Font("font/font.png", 10, 10);
 
     }

@@ -8,7 +8,6 @@ import com.force.util.AABB;
 import com.force.util.TileCollision;
 import com.force.util.Vector2f;
 
-import java.awt.Rectangle;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -54,7 +53,6 @@ public abstract class Entity {
 
     protected AABB hitBounds;
     protected AABB bounds;
-    protected Rectangle attackbox = null;
 
     protected TileCollision tc;
 
@@ -151,37 +149,7 @@ public abstract class Entity {
             hitBounds.setYOffset(0);
         }
     }
-    public Rectangle attackbox(){
 
-        if(dir == (float)(Math.PI/2)){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y), 50, 30);
-        }
-        if(dir == (float)0){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) + 60, (int) (pos.getWorldVar().y + 22), 30, 50);
-
-        }
-        if(dir == (float)Math.PI){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) - 27, (int) (pos.getWorldVar().y + 22), 30, 50);
-
-        }
-        if(dir == -(float)(Math.PI)/2){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y) + 70, 50, 30);
-        }
-        if(dir == (float)(Math.PI)/4){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) + 35, (int) (pos.getWorldVar().y) - 5, 39, 39);
-        }
-        if(dir == -(float)(Math.PI)/4){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) + 35, (int) (pos.getWorldVar().y) + 66, 39, 39);
-        }
-        if(dir == (float)(3*Math.PI)/4){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) - 10, (int) (pos.getWorldVar().y) - 5, 39, 39);
-        }
-        if(dir == (float)(-3*Math.PI)/4){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) - 10, (int) (pos.getWorldVar().y) + 66, 39, 39);
-        }
-
-        return attackbox;
-    }
 
     public void update() {
         animate();
@@ -206,9 +174,6 @@ public abstract class Entity {
         return false;
     }
 
-//    public float getDistanceTo(Entity x1, Entity x2){
-//        return (float)(Math.sqrt(((x1.pos.x - x2.pos.x)*(x1.pos.x - x2.pos.x)) + ((x1.pos.y - x2.pos.y)*(x1.pos.y - x2.pos.y))));
-//    }
     public void setLives(int lives){
         LIVES = lives;
     }

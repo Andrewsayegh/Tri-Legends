@@ -20,33 +20,24 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
     public int getMouseX() {
         return mouseX;
     }
-
     public int getMouseY() {
         return mouseY;
     }
-
     public int getButton() {
         return mouseB;
     }
-
     public void mouseClicked(MouseEvent e) { }
-
     public void mousePressed(MouseEvent e) {
         mouseB = e.getButton();
     }
-
     public void mouseReleased(MouseEvent e) {
         mouseB = -1;
     }
-
     public void mouseEntered(MouseEvent e) { }
-
     public void mouseExited(MouseEvent e) { }
-
     public void mouseDragged(MouseEvent e) {
         mouseX = e.getX();
         mouseY = e.getY();
     }
-
     public void mouseMoved(MouseEvent e) { }
 }
