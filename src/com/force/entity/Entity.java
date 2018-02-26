@@ -51,6 +51,7 @@ public abstract class Entity {
     protected float acceleration;
     protected float tvConstant;
     protected int dir;
+    protected int aDir;
 
     protected AABB hitBounds;
     protected AABB bounds;
@@ -150,37 +151,6 @@ public abstract class Entity {
             hitBounds.setXOffset(size / 2);
             hitBounds.setYOffset(0);
         }
-    }
-    public Rectangle attackbox(){
-
-        if(dir == (float)(Math.PI/2)){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y), 50, 30);
-        }
-        if(dir == (float)0){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) + 60, (int) (pos.getWorldVar().y + 22), 30, 50);
-
-        }
-        if(dir == (float)Math.PI){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) - 27, (int) (pos.getWorldVar().y + 22), 30, 50);
-
-        }
-        if(dir == -(float)(Math.PI)/2){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y) + 70, 50, 30);
-        }
-        if(dir == (float)(Math.PI)/4){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) + 35, (int) (pos.getWorldVar().y) - 5, 39, 39);
-        }
-        if(dir == -(float)(Math.PI)/4){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) + 35, (int) (pos.getWorldVar().y) + 66, 39, 39);
-        }
-        if(dir == (float)(3*Math.PI)/4){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) - 10, (int) (pos.getWorldVar().y) - 5, 39, 39);
-        }
-        if(dir == (float)(-3*Math.PI)/4){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) - 10, (int) (pos.getWorldVar().y) + 66, 39, 39);
-        }
-
-        return attackbox;
     }
 
     public void update() {
