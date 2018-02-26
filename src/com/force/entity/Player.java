@@ -244,6 +244,7 @@ public class Player extends Entity {
     }
 
     public Rectangle attackbox(){
+        Rectangle attackbox = null;
 
         if(aDir == 1){
             attackbox = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y), 50, 30);
