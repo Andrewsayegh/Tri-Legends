@@ -50,6 +50,7 @@ public abstract class Entity {
     protected float acceleration;
     protected float tvConstant;
     protected int dir;
+    protected int aDir;
 
     protected AABB hitBounds;
     protected AABB bounds;

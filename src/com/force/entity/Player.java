@@ -86,6 +86,7 @@ public class Player extends Entity {
                 dir = 3;
             if (right)
                 dir = 4;
+            aDir = 1;
         }
         if (firstPressed == 2) {
             dir = 2;
@@ -93,6 +94,7 @@ public class Player extends Entity {
                 dir = 3;
             if (right)
                 dir = 4;
+            aDir = 2;
         }
         if (firstPressed == 3) {
             dir = 3;
@@ -100,6 +102,7 @@ public class Player extends Entity {
                 dir = 1;
             if (down)
                 dir = 2;
+            aDir = 3;
         }
         if (firstPressed == 4) {
             dir = 4;
@@ -107,6 +110,7 @@ public class Player extends Entity {
                 dir = 1;
             if (down)
                 dir = 2;
+            aDir = 4;
         }
         dx += tvConstant * dx;
         dy += tvConstant * dy;
@@ -236,6 +240,56 @@ public class Player extends Entity {
             down = false;
             right = false;
             left = false;
+        }
+    }
+
+    public Rectangle attackbox(){
+
+        if(aDir == 1){
+            attackbox = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y), 50, 30);
+        }
+        if(aDir == 4){
+            attackbox = new Rectangle((int) (pos.getWorldVar().x) + 60, (int) (pos.getWorldVar().y + 22), 30, 50);
+
+        }
+        if(aDir == 3){
+            attackbox = new Rectangle((int) (pos.getWorldVar().x) - 27, (int) (pos.getWorldVar().y + 22), 30, 50);
+
+        }
+        if(aDir == 2){
+            attackbox = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y) + 70, 50, 30);
+        }
+
+        return attackbox;
+    }
+
+    public void animate() {
+        if (firstPressed == 1) {
+            if (currentAnimation != UP || animate.getDelay() == -1) {
+                setAnimation(UP, sprite.getSpriteArray(UP), 5);
+            }
+        } else if (firstPressed == 2) {
+            if (currentAnimation != DOWN || animate.getDelay() == -1) {
+                setAnimation(DOWN, sprite.getSpriteArray(DOWN), 5);
+            }
+        } else if (firstPressed == 4) {
+            if (currentAnimation != RIGHT || animate.getDelay() == -1) {
+                setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 5);
+            }
+        } else if (firstPressed == 3) {
+            if (currentAnimation != LEFT || animate.getDelay() == -1) {
+                setAnimation(LEFT, sprite.getSpriteArray(LEFT), 5);
+            }
+        } else if (fallen) {
+            if (currentAnimation != FALLEN || animate.getDelay() == -1) {
+                setAnimation(FALLEN, sprite.getSpriteArray(FALLEN), 15);
+            }
+//        } else if (attack){
+//            if(currentAnimation != ATTACK || animate.getDelay() == -1) {
+//                setAnimation(ATTACK, sprite.getSpriteArray(ATTACK),5);
+//            }
+        } else {
+            setAnimation(currentAnimation, sprite.getSpriteArray(currentAnimation), -1);
         }
     }
 
