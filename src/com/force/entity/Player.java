@@ -79,7 +79,6 @@ public class Player extends Entity {
             firstPressed = 0;
         }
 
-
         if (firstPressed == 1) {
             dir = 1;
             if (left)
@@ -200,7 +199,6 @@ public class Player extends Entity {
         lives.drawHearts(g, LIVES);
     }
 
-
     public void input(MouseHandler mouse, KeyHandler key) {
 
         if (!fallen) {
@@ -293,5 +291,4 @@ public class Player extends Entity {
             setAnimation(currentAnimation, sprite.getSpriteArray(currentAnimation), -1);
         }
     }
-
 }
