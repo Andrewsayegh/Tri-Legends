@@ -11,7 +11,7 @@ import java.awt.Color;
 
 public class Bat extends Enemy {
 
-    public int s = 3;
+    public int s = 2;
 
     public long moveTurn = System.currentTimeMillis();
 
@@ -60,13 +60,13 @@ public class Bat extends Enemy {
             moveTurn = System.currentTimeMillis();
         }
         s = 2;
-        if (up)
+        if (up && pos.y > 0)
             pos.y += -s;
-        if (down)
+        if (down && pos.y < 6400)
             pos.y += s;
-        if (left)
+        if (left && pos.x > 0)
             pos.x += -s;
-        if (right)
+        if (right && pos.x < 6400)
             pos.x += s;
     }
 
@@ -89,6 +89,7 @@ public class Bat extends Enemy {
     }
 
     public void update(Entity player, int radius) {
+        fallen = false;
         super.update();
         if (LIVES > 0) {
             if (getDistanceTo(player) >= radius) {

@@ -11,12 +11,14 @@ import com.force.util.MouseHandler;
 import com.force.util.Vector2f;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 public class PlayState extends GameState {
 
     private Font font;
     private Player player;
     private TileManager tm;
+    private ArrayList<Bat> bats;
     private Bat bat;
 
     public static Vector2f map;
@@ -31,16 +33,24 @@ public class PlayState extends GameState {
         font = new Font("font/font.png", 10, 10);
 
         player = new Player(new Sprite("entity/player/linkFormatted.png"), new Vector2f(0 + (GamePanel.width / 2) - 32, 0 + (GamePanel.height / 2) - 32), 64);
+
+        bats = new ArrayList<Bat>();
+        for (int i = 0; i < 5; i++) {
+            Bat bat = new Bat(new Sprite("entity/enemies/bat-spritesheet-calciumtrice.png"), new Vector2f((float)Math.random()*1000, (float)Math.random()*1000), 64);
+            bats.add(bat);
+        }
         bat = new Bat(new Sprite("entity/enemies/bat-spritesheet-calciumtrice.png"), new Vector2f(0 + 100, 0 + 100), 64);
     }
 
     public void update() {
         Vector2f.setWorldVar(map.x, map.y);
-
         if (player.isDead())
             gsm.setState(GameStateManager.GAMEOVER);
         else {
             player.update();
+            for (Bat bat: bats) {
+                bat.update(player, 300);
+            }
             bat.update(player, 300);
 
         }
@@ -57,6 +67,9 @@ public class PlayState extends GameState {
         Sprite.drawArray(g, font, fps, new Vector2f(GamePanel.width - fps.length() * 32, 32), 32, 24);
 
         player.render(g);
+        for (Bat bat: bats) {
+            bat.render(g);
+        }
         bat.render(g);
     }
 
