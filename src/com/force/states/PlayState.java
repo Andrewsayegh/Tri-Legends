@@ -35,8 +35,8 @@ public class PlayState extends GameState {
         player = new Player(new Sprite("entity/player/linkFormatted.png"), new Vector2f(0 + (GamePanel.width / 2) - 32, 0 + (GamePanel.height / 2) - 32), 64);
 
         bats = new ArrayList<Bat>();
-        for (int i = 0; i < 5; i++) {
-            Bat bat = new Bat(new Sprite("entity/enemies/bat-spritesheet-calciumtrice.png"), new Vector2f((float)Math.random()*1000, (float)Math.random()*1000), 64);
+        for (int i = 0; i < 10; i++) {
+            Bat bat = new Bat(new Sprite("entity/enemies/bat-spritesheet-calciumtrice.png"), new Vector2f((float)Math.random()*6400, (float)Math.random()*6400), 64);
             bats.add(bat);
         }
         bat = new Bat(new Sprite("entity/enemies/bat-spritesheet-calciumtrice.png"), new Vector2f(0 + 100, 0 + 100), 64);

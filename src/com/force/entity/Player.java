@@ -32,7 +32,6 @@ public class Player extends Entity {
     public void move() {
 
         if (!up && !down && !left && !right) {
-            down = true;
             firstPressed = 0;
             dir = 0;
         }
@@ -40,19 +39,15 @@ public class Player extends Entity {
         switch (dir) {
             case 1:
                 dy -= acceleration; //up
-                System.out.println("up");
                 break;
             case 2:
                 dy += acceleration; //down
-                System.out.println("down");
                 break;
             case 3:
                 dx -= acceleration; //left
-                System.out.println("left");
                 break;
             case 4:
                 dx += acceleration; // right
-                System.out.println("right");
         }
 
         if (up && firstPressed == 0) {
@@ -62,7 +57,7 @@ public class Player extends Entity {
             firstPressed = 0;
         }
 
-        if (down && firstPressed == 0) {
+        if (down && firstPressed == 0) {            //1 up, 2 down, 3 left, 4 right, 0 None
             firstPressed = 2;
 //            dir = 2;
         } else if (firstPressed == 2 && !down) {
