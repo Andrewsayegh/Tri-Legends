@@ -40,15 +40,19 @@ public class Player extends Entity {
         switch (dir) {
             case 1:
                 dy -= acceleration; //up
+                System.out.println("up");
                 break;
             case 2:
                 dy += acceleration; //down
+                System.out.println("down");
                 break;
             case 3:
                 dx -= acceleration; //left
+                System.out.println("left");
                 break;
             case 4:
                 dx += acceleration; // right
+                System.out.println("right");
         }
 
         if (up && firstPressed == 0) {
@@ -126,32 +130,6 @@ public class Player extends Entity {
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 8);
     }
 
-    public Rectangle attackBox(Rectangle rect) {
-        System.out.println(firstPressed);
-        switch (firstPressed) {
-            case (0):
-                rect = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y), 50, 30);
-                break;
-            case (1):
-                if (up)
-                    rect = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y), 50, 30);
-                break;
-            case (4):
-                if (right)
-                    rect = new Rectangle((int) (pos.getWorldVar().x) + 60, (int) (pos.getWorldVar().y + 22), 30, 50);
-                break;
-            case (3):
-                if (left)
-                    rect = new Rectangle((int) (pos.getWorldVar().x) - 27, (int) (pos.getWorldVar().y + 22), 30, 50);
-                break;
-            case (2):
-                if (down)
-                    rect = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y) + 70, 50, 30);
-                break;
-        }
-        return rect;
-    }
-
     public void update() {
         super.update();
 
@@ -182,7 +160,7 @@ public class Player extends Entity {
         g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
 
         if (attack) {
-            rect = attackBox(rect);
+            rect = attackbox();
             g.setColor(Color.red);
             g.draw(rect);
         }
@@ -263,23 +241,7 @@ public class Player extends Entity {
     }
 
     public void animate() {
-        if (firstPressed == 1) {
-            if (currentAnimation != UP || animate.getDelay() == -1) {
-                setAnimation(UP, sprite.getSpriteArray(UP), 5);
-            }
-        } else if (firstPressed == 2) {
-            if (currentAnimation != DOWN || animate.getDelay() == -1) {
-                setAnimation(DOWN, sprite.getSpriteArray(DOWN), 5);
-            }
-        } else if (firstPressed == 4) {
-            if (currentAnimation != RIGHT || animate.getDelay() == -1) {
-                setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 5);
-            }
-        } else if (firstPressed == 3) {
-            if (currentAnimation != LEFT || animate.getDelay() == -1) {
-                setAnimation(LEFT, sprite.getSpriteArray(LEFT), 5);
-            }
-        } else if (fallen) {
+        if (fallen) {
             if (currentAnimation != FALLEN || animate.getDelay() == -1) {
                 setAnimation(FALLEN, sprite.getSpriteArray(FALLEN), 15);
             }
@@ -287,6 +249,23 @@ public class Player extends Entity {
 //            if(currentAnimation != ATTACK || animate.getDelay() == -1) {
 //                setAnimation(ATTACK, sprite.getSpriteArray(ATTACK),5);
 //            }
+        }
+        else if (firstPressed == 1 && up) {
+            if (currentAnimation != UP || animate.getDelay() == -1) {
+                setAnimation(UP, sprite.getSpriteArray(UP), 5);
+            }
+        } else if (firstPressed == 2 && down) {
+            if (currentAnimation != DOWN || animate.getDelay() == -1) {
+                setAnimation(DOWN, sprite.getSpriteArray(DOWN), 5);
+            }
+        } else if (firstPressed == 4 && right) {
+            if (currentAnimation != RIGHT || animate.getDelay() == -1) {
+                setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 5);
+            }
+        } else if (firstPressed == 3 && left) {
+            if (currentAnimation != LEFT || animate.getDelay() == -1) {
+                setAnimation(LEFT, sprite.getSpriteArray(LEFT), 5);
+            }
         } else {
             setAnimation(currentAnimation, sprite.getSpriteArray(currentAnimation), -1);
         }
