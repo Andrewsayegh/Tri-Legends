@@ -129,6 +129,7 @@ public class Player extends Entity {
         super.update();
 
         if (!fallen) {
+
             move();
             if (!tc.collisionTile(dx, 0)) {
                 PlayState.map.x += dx;
@@ -137,6 +138,14 @@ public class Player extends Entity {
             if (!tc.collisionTile(0, dy)) {
                 PlayState.map.y += dy;
                 pos.y += dy;
+            }
+            if (tc.collisonWall(dx, 0)) {
+                PlayState.map.x -= dx;
+                pos.x -= dx;
+            }
+            if (tc.collisonWall(0, dy)) {
+                PlayState.map.y -= dy;
+                pos.y -= dy;
             }
         } else {
             if (animate.hasPlayedOnce()) {

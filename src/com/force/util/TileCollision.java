@@ -4,6 +4,8 @@ import com.force.entity.Entity;
 import com.force.tiles.TileMapObj;
 import com.force.tiles.blocks.Block;
 import com.force.tiles.blocks.HoleBlock;
+import com.force.tiles.blocks.ObjBlock;
+import com.force.tiles.blocks.WallBlock;
 
 public class TileCollision {
     private Entity e;
@@ -21,6 +23,23 @@ public class TileCollision {
             if (TileMapObj.tmo_blocks.containsKey(String.valueOf(xt) + "," + String.valueOf(yt))) {
                 Block block = TileMapObj.tmo_blocks.get(String.valueOf(xt) + "," + String.valueOf(yt));
                 if (block instanceof HoleBlock) {
+                    return collisionHole(ax, ay, xt, yt, block);
+                }
+                return block.update(e.getBounds());
+            }
+        }
+
+        return false;
+    }
+    public boolean collisonWall(float ax, float ay) {
+        for (int c = 0; c < 4; c++) {
+
+            int xt = (int) ((e.getBounds().getPos().x + ax) + (c % 2) * e.getBounds().getWidth() + e.getBounds().getXOffset()) / 64;
+            int yt = (int) ((e.getBounds().getPos().y + ay) + (c / 2) * e.getBounds().getHeight() + e.getBounds().getYOffset()) / 64;
+
+            if (TileMapObj.tmo_blocks.containsKey(String.valueOf(xt) + "," + String.valueOf(yt))) {
+                Block block = TileMapObj.tmo_blocks.get(String.valueOf(xt) + "," + String.valueOf(yt));
+                if (block instanceof WallBlock) {
                     return collisionHole(ax, ay, xt, yt, block);
                 }
                 return block.update(e.getBounds());
