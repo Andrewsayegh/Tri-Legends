@@ -4,6 +4,7 @@ import com.force.graphics.Sprite;
 import com.force.tiles.blocks.Block;
 import com.force.tiles.blocks.HoleBlock;
 import com.force.tiles.blocks.ObjBlock;
+import com.force.tiles.blocks.WallBlock;
 import com.force.util.Vector2f;
 
 import java.util.HashMap;
@@ -23,8 +24,12 @@ public class TileMapObj extends TileMap {
             if (temp != 0) {
                 if (temp == 172) {
                     tempBlock = new HoleBlock(sprite.getSprite((int) ((temp - 1) % tileColumns), (int) ((temp - 1) / tileColumns)), new Vector2f((int) (i % width) * tileWidth, (int) (i / height) * tileHeight), tileWidth, tileHeight);
-                } else {
-                    tempBlock = new ObjBlock(sprite.getSprite((int) ((temp - 1) % tileColumns), (int) ((temp - 1) / tileColumns)), new Vector2f((int) (i % width) * tileWidth, (int) (i / height) * tileHeight), tileWidth, tileHeight);
+
+                }
+//
+                else {
+                    tempBlock = new WallBlock(sprite.getSprite((int) ((temp - 1) % tileColumns), (int) ((temp - 1) / tileColumns)), new Vector2f((int) (i % width) * tileWidth, (int) (i / height) * tileHeight), tileWidth, tileHeight);
+
                 }
                 tmo_blocks.put(String.valueOf((int) (i % width)) + "," + String.valueOf((int) (i / height)), tempBlock);
             }
