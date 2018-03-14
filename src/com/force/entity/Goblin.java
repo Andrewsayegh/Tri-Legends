@@ -196,5 +196,9 @@ public class Goblin extends Enemy {
     public void update(Entity player) {
         super.update();
         move2(player);
+
+        if(getDistanceTo(player) <= 10){
+            player.manageLives(-1);
+        }
     }
 }
