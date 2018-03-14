@@ -40,7 +40,7 @@ public class Goblin extends Enemy {
         g.setColor(Color.red);
         g.drawRect((int) pos.getWorldVar().x + (int) bounds.getXOffset(), (int) pos.getWorldVar().y + (int) bounds.getYOffset(), (int) bounds.getWidth(), (int) bounds.getHeight());
 
-        g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
+        g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x) - 10, (int) (pos.getWorldVar().y), size, size, null);
 
         g.setColor(Color.blue);
         g.drawRect((int) pos.x, (int) pos.y, (int) bounds.getWidth(), (int) bounds.getHeight());
