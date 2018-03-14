@@ -23,7 +23,7 @@ public class Bat extends Enemy {
         bounds.setHeight(20);
         bounds.setXOffset(12);
         bounds.setYOffset(40);
-        setLives(3);
+        setLives(1);
     }
 
 
@@ -59,7 +59,6 @@ public class Bat extends Enemy {
             }
             moveTurn = System.currentTimeMillis();
         }
-        s = 2;
         if (up && pos.y > 0)
             pos.y += -s;
         if (down && pos.y < 6400)
@@ -81,10 +80,7 @@ public class Bat extends Enemy {
         }
 
         if (getDistanceTo(player) <= 10) {
-            attack = true;
-            if (attack == true) {
-                player.manageLives(-0.5);
-            }
+            player.manageLives(-0);
         }
     }
 
@@ -105,14 +101,6 @@ public class Bat extends Enemy {
             if (!tc.collisionTile(0, dy)) {
                 PlayState.map.y += dy;
                 pos.y += dy;
-            }
-        } else {
-            if (animate.hasPlayedOnce()) {
-                //resetPosition();
-                dx = 0;
-                dy = 0;
-                fallen = false;
-                manageLives(-1);
             }
         }
     }

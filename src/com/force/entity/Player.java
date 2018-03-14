@@ -154,6 +154,9 @@ public class Player extends Entity {
         g.setColor(Color.green);
         g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
 
+        g.setColor(Color.YELLOW);
+        g.drawRect((int)pos.x, (int)pos.y, (int)bounds.getWidth(), (int)bounds.getHeight() );
+
         if (attack) {
             rect = attackbox();
             g.setColor(Color.red);

@@ -2,6 +2,7 @@ package com.force.states;
 
 import com.force.GamePanel;
 import com.force.entity.Bat;
+import com.force.entity.Goblin;
 import com.force.entity.Player;
 import com.force.graphics.Font;
 import com.force.graphics.Sprite;
@@ -19,7 +20,7 @@ public class PlayState extends GameState {
     private Player player;
     private TileManager tm;
     private ArrayList<Bat> bats;
-    private Bat bat;
+    private Goblin hunk;
 
     public static Vector2f map;
 
@@ -34,12 +35,13 @@ public class PlayState extends GameState {
 
         player = new Player(new Sprite("entity/player/linkFormatted.png"), new Vector2f(0 + (GamePanel.width / 2) - 32, 0 + (GamePanel.height / 2) - 32), 64);
 
+        hunk = new Goblin(new Sprite("entity/enemies/Goblin.png"), new Vector2f(0 + (GamePanel.width / 2) , 0 + (GamePanel.height / 2) + 200), 64);
+
         bats = new ArrayList<Bat>();
         for (int i = 0; i < 10; i++) {
             Bat bat = new Bat(new Sprite("entity/enemies/bat-spritesheet-calciumtrice.png"), new Vector2f((float)Math.random()*6400, (float)Math.random()*6400), 64);
             bats.add(bat);
         }
-        bat = new Bat(new Sprite("entity/enemies/bat-spritesheet-calciumtrice.png"), new Vector2f(0 + 100, 0 + 100), 64);
     }
 
     public void update() {
@@ -51,7 +53,7 @@ public class PlayState extends GameState {
             for (Bat bat: bats) {
                 bat.update(player, 300);
             }
-            bat.update(player, 300);
+            hunk.update(player);
 
         }
     }
@@ -70,7 +72,7 @@ public class PlayState extends GameState {
         for (Bat bat: bats) {
             bat.render(g);
         }
-        bat.render(g);
+        hunk.render(g);
     }
 
 }

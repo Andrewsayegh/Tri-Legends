@@ -13,13 +13,13 @@ import java.awt.image.BufferedImage;
 
 public abstract class Entity {
 
-    protected final int UP = 3;
-    protected final int DOWN = 2;
-    protected final int RIGHT = 0;
-    protected final int LEFT = 1;
-    protected final int FALLEN = 4;
-    protected final int ATTACK = 5;
-    protected final int SPECIAL = 6;
+    protected int UP = 3;
+    protected int DOWN = 2;
+    protected int RIGHT = 0;
+    protected int LEFT = 1;
+    protected int FALLEN = 4;
+    protected int ATTACK = 5;
+    protected int SPECIAL = 6;
     protected double LIVES = 3;
 
     protected int currentAnimation;
