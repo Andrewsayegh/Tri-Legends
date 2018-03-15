@@ -148,6 +148,7 @@ public class Player extends Entity {
                 enemy.manageLives(-1);
             }
         }
+
     }
 
     public void update() {
