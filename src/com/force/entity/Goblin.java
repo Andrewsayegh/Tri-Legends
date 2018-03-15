@@ -101,6 +101,12 @@ public class Goblin extends Enemy {
             if (!tc.collisionTile(0, dy)) {
                 pos.y += dy;
             }
+            if (tc.collisonWall(dx, 0)){
+                pos.x -= dx;
+            }
+            if (tc.collisonWall(0, dy)){
+                pos.y -= dy;
+            }
         } else {
             moveTurn = System.currentTimeMillis() - GamePanel.oldFrameCount * 130;
             if (up) {
@@ -183,10 +189,10 @@ public class Goblin extends Enemy {
                 RIGHT = 6;
 
                 if (!fallen) {
-                    if (!tc.collisionTile(dx, 0)) {
+                    if (!tc.collisionTile(2 * s * chargeXdir, 0)) {
                         pos.x += 2 * s * chargeXdir;
                     }
-                    if (!tc.collisionTile(0, dy)) {
+                    if (!tc.collisionTile(0, 2 * s * chargeYdir)) {
                         pos.y += 2 * s * chargeYdir;
                     }
                 }
