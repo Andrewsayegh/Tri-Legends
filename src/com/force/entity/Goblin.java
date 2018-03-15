@@ -1,8 +1,6 @@
 package com.force.entity;
 
 import com.force.GamePanel;
-import com.force.entity.Enemy;
-import com.force.entity.Entity;
 import com.force.graphics.Sprite;
 import com.force.util.Vector2f;
 
@@ -21,11 +19,6 @@ public class Goblin extends Enemy {
     public Goblin(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size, false);
 
-        UP = 3;
-        DOWN = 0;
-        LEFT = 1;
-        RIGHT = 2;
-
         s = 2;
         s2 = 4;
         moveTurn = System.currentTimeMillis();
@@ -42,16 +35,22 @@ public class Goblin extends Enemy {
         g.setColor(Color.red);
         g.drawRect((int) pos.getWorldVar().x + (int) bounds.getXOffset(), (int) pos.getWorldVar().y + (int) bounds.getYOffset(), (int) bounds.getWidth(), (int) bounds.getHeight());
 
-        g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
+        g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x) - 10, (int) (pos.getWorldVar().y), size, size, null);
 
-        g.setColor(Color.blue);
-        g.drawRect((int) pos.getWorldVar().x, (int) pos.getWorldVar().y, (int) bounds.getWidth(), (int) bounds.getHeight());
     }
 
     public void move() {
 
+        UP = 3;
+        DOWN = 0;
+        LEFT = 1;
+        RIGHT = 2;
+
         int rand = (int) (Math.random() * 4);
+
 //        rand = 3;
+
+
         if (System.currentTimeMillis() - moveTurn >= GamePanel.oldFrameCount * 150) {
 
             if (rand == 0) {
@@ -177,6 +176,12 @@ public class Goblin extends Enemy {
             } else if (!charging) {
                 move();
             } else {
+
+                UP = 7;
+                DOWN = 4;
+                LEFT = 5;
+                RIGHT = 6;
+
                 if (!fallen) {
                     if (!tc.collisionTile(dx, 0)) {
                         pos.x += 2 * s * chargeXdir;
@@ -195,5 +200,9 @@ public class Goblin extends Enemy {
     public void update(Entity player) {
         super.update();
         move2(player);
+
+        if(getDistanceTo(player) <= 10){
+            player.manageLives(-1);
+        }
     }
 }

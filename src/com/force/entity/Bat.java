@@ -80,7 +80,7 @@ public class Bat extends Enemy {
         }
 
         if (getDistanceTo(player) <= 10) {
-            player.manageLives(-1);
+            player.manageLives(-.5);
         }
     }
 
