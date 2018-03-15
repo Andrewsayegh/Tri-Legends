@@ -9,23 +9,21 @@ import com.force.util.MouseHandler;
 import com.force.util.Vector2f;
 
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Player extends Entity {
-
-    protected Rectangle rect;
 
     public Player(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size, true);
         acceleration = 4f;
-        tvConstant = -.5f;
+        tvConstant = -0.5f;
         bounds.setWidth(42);
         bounds.setHeight(20);
-        bounds.setXOffset(10);
+        bounds.setXOffset(12);
         bounds.setYOffset(40);
     }
 
@@ -122,7 +120,35 @@ public class Player extends Entity {
         pos.y = GamePanel.height / 2 - 32;
         PlayState.map.y = 0;
 
-        setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 8);
+        setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
+    }
+
+    public void setHitBoxDirection() {
+
+        if (up) {
+            hitBounds.setYOffset(-size / 2);
+            hitBounds.setXOffset(0);
+        } else if (down) {
+            hitBounds.setYOffset(size / 2);
+            hitBounds.setXOffset(0);
+        } else if (left) {
+            hitBounds.setXOffset(-size / 2);
+            hitBounds.setYOffset(0);
+        } else if (right) {
+            hitBounds.setXOffset(size / 2);
+            hitBounds.setYOffset(0);
+        }
+    }
+
+
+    public void checkCollision(ArrayList<Enemy> e) {
+        setHitBoxDirection();
+        for (Enemy enemy : e) {
+            if (attack && hitBounds.collides(enemy.getBounds())) {
+                enemy.manageLives(-1);
+            }
+        }
+
     }
 
     public void update() {
@@ -164,10 +190,10 @@ public class Player extends Entity {
         g.drawRect((int) (pos.getWorldVar().x + bounds.getXOffset()), (int) (pos.getWorldVar().y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
 
         if (attack) {
-            rect = attackbox();
-            g.setColor(Color.red);
-            g.draw(rect);
+            g.setColor(Color.MAGENTA);
+            g.drawOval((int) (hitBounds.getPos().getWorldVar().x + hitBounds.getXOffset()), (int) (hitBounds.getPos().getWorldVar().y + hitBounds.getYOffset()), (int) hitBounds.getWidth(), (int) hitBounds.getHeight());
         }
+
         if (invincibility) {
             BufferedImage image = animate.getImage();
             Composite oldC = g.getComposite();
@@ -189,16 +215,19 @@ public class Player extends Entity {
             } else {
                 up = false;
             }
+
             if (key.down.isDown) {
                 down = true;
             } else {
                 down = false;
             }
+
             if (key.left.isDown) {
                 left = true;
             } else {
                 left = false;
             }
+
             if (key.right.isDown) {
                 right = true;
             } else {
@@ -210,6 +239,7 @@ public class Player extends Entity {
             } else {
                 attack = false;
             }
+
             if (key.special.isDown) {
                 special = true;
             } else {
@@ -223,27 +253,6 @@ public class Player extends Entity {
         }
     }
 
-    public Rectangle attackbox(){
-        Rectangle attackbox = null;
-
-        if(aDir == 1){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y), 50, 30);
-        }
-        if(aDir == 4){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) + 60, (int) (pos.getWorldVar().y + 22), 30, 50);
-
-        }
-        if(aDir == 3){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x) - 27, (int) (pos.getWorldVar().y + 22), 30, 50);
-
-        }
-        if(aDir == 2){
-            attackbox = new Rectangle((int) (pos.getWorldVar().x + 6), (int) (pos.getWorldVar().y) + 70, 50, 30);
-        }
-
-        return attackbox;
-    }
-
     public void animate() {
         if (fallen) {
             if (currentAnimation != FALLEN || animate.getDelay() == -1) {
@@ -253,8 +262,7 @@ public class Player extends Entity {
 //            if(currentAnimation != ATTACK || animate.getDelay() == -1) {
 //                setAnimation(ATTACK, sprite.getSpriteArray(ATTACK),5);
 //            }
-        }
-        else if (firstPressed == 1 && up) {
+        } else if (firstPressed == 1 && up) {
             if (currentAnimation != UP || animate.getDelay() == -1) {
                 setAnimation(UP, sprite.getSpriteArray(UP), 5);
             }

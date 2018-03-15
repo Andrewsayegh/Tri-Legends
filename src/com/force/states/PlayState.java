@@ -2,6 +2,7 @@ package com.force.states;
 
 import com.force.GamePanel;
 import com.force.entity.Bat;
+import com.force.entity.Enemy;
 import com.force.entity.Goblin;
 import com.force.entity.Player;
 import com.force.graphics.Font;
@@ -20,7 +21,8 @@ public class PlayState extends GameState {
     private Player player;
     private TileManager tm;
     private ArrayList<Bat> bats;
-    private Goblin hunk;
+    private ArrayList<Enemy> enemies;
+    private ArrayList<Goblin> goblins;
 
     public static Vector2f map;
 
@@ -35,12 +37,24 @@ public class PlayState extends GameState {
 
         player = new Player(new Sprite("entity/player/linkFormatted.png"), new Vector2f(0 + (GamePanel.width / 2) - 32, 0 + (GamePanel.height / 2) - 32), 64);
 
-        hunk = new Goblin(new Sprite("entity/enemies/Goblin.png"), new Vector2f(0 + (GamePanel.width / 2) , 0 + (GamePanel.height / 2) + 200), 64);
-
+        enemies = new ArrayList<Enemy>();
         bats = new ArrayList<Bat>();
+        goblins = new ArrayList<Goblin>();
+
+        for (int i = 0; i < 1; i++) {
+            Goblin goblin = new Goblin(new Sprite("entity/enemies/Goblin.png"), new Vector2f(0 + (GamePanel.width / 2) , 0 + (GamePanel.height / 2) + 200), 64);
+            goblins.add(goblin);
+        }
+
         for (int i = 0; i < 10; i++) {
             Bat bat = new Bat(new Sprite("entity/enemies/bat-spritesheet-calciumtrice.png"), new Vector2f((float)Math.random()*6400, (float)Math.random()*6400), 64);
             bats.add(bat);
+        }
+        for (Bat bat: bats) {
+            enemies.add(bat);
+        }
+        for (Goblin gob: goblins){
+            enemies.add(gob);
         }
     }
 
@@ -50,11 +64,14 @@ public class PlayState extends GameState {
             gsm.setState(GameStateManager.GAMEOVER);
         else {
             player.update();
+
+            player.checkCollision(enemies);
             for (Bat bat: bats) {
                 bat.update(player, 300);
             }
-            hunk.update(player);
-
+            for (Goblin gob: goblins) {
+                gob.update(player);
+            }
         }
     }
 
@@ -72,7 +89,9 @@ public class PlayState extends GameState {
         for (Bat bat: bats) {
             bat.render(g);
         }
-        hunk.render(g);
+        for (Goblin gob: goblins) {
+            gob.render(g);
+        }
     }
 
 }
