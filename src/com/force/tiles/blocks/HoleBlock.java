@@ -13,9 +13,6 @@ public class HoleBlock extends Block {
     }
 
     public boolean update(AABB p) {
-
-        System.out.println("I am a hole");
-
         return false;
     }
 

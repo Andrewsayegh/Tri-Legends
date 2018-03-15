@@ -19,11 +19,6 @@ public class Goblin extends Enemy {
     public Goblin(Sprite sprite, Vector2f orgin, int size) {
         super(sprite, orgin, size, false);
 
-        UP = 3;
-        DOWN = 0;
-        LEFT = 1;
-        RIGHT = 2;
-
         s = 2;
         s2 = 4;
         moveTurn = System.currentTimeMillis();
@@ -42,11 +37,14 @@ public class Goblin extends Enemy {
 
         g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x) - 10, (int) (pos.getWorldVar().y), size, size, null);
 
-        g.setColor(Color.blue);
-        g.drawRect((int) pos.x, (int) pos.y, (int) bounds.getWidth(), (int) bounds.getHeight());
     }
 
     public void move() {
+
+        UP = 3;
+        DOWN = 0;
+        LEFT = 1;
+        RIGHT = 2;
 
         int rand = (int) (Math.random() * 4);
 
@@ -178,6 +176,12 @@ public class Goblin extends Enemy {
             } else if (!charging) {
                 move();
             } else {
+
+                UP = 7;
+                DOWN = 4;
+                LEFT = 5;
+                RIGHT = 6;
+
                 if (!fallen) {
                     if (!tc.collisionTile(dx, 0)) {
                         pos.x += 2 * s * chargeXdir;
