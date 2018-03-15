@@ -4,6 +4,7 @@ import com.force.util.AABB;
 import com.force.util.Vector2f;
 
 import java.awt.Graphics2D;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class ObjBlock extends Block {
@@ -25,9 +26,8 @@ public class ObjBlock extends Block {
 
         /**
          * DEBUGING COLLISION *
-         * SHOW COLLISION BOXES *
-//         g.setColor(Color.WHITE);
-//         g.drawRect((int) pos.getWorldVar().x, (int) pos.getWorldVar().y, width, height);
-         */
+         * SHOW COLLISION BOXES */
+         g.setColor(Color.WHITE);
+         g.drawRect((int) pos.getWorldVar().x, (int) pos.getWorldVar().y, width, height);
     }
 }

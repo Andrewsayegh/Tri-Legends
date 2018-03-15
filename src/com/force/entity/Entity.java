@@ -63,7 +63,8 @@ public abstract class Entity {
         this.size = size;
 
         bounds = new AABB(orgin, size, size);
-        hitBounds = new AABB(new Vector2f(orgin.x + (size / 2), orgin.y), size, size);
+        hitBounds = new AABB(orgin, size, size);
+        hitBounds.setXOffset(size / 2);
 
         animate = new Animation();
         setAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
@@ -175,7 +176,7 @@ public abstract class Entity {
         return false;
     }
 
-    public void setLives(int lives){
+    public void setLives(int lives) {
         LIVES = lives;
     }
 

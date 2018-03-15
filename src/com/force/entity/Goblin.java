@@ -1,6 +1,8 @@
 package com.force.entity;
 
 import com.force.GamePanel;
+import com.force.entity.Enemy;
+import com.force.entity.Entity;
 import com.force.graphics.Sprite;
 import com.force.util.Vector2f;
 
@@ -43,16 +45,13 @@ public class Goblin extends Enemy {
         g.drawImage(animate.getImage(), (int) (pos.getWorldVar().x), (int) (pos.getWorldVar().y), size, size, null);
 
         g.setColor(Color.blue);
-        g.drawRect((int) pos.x, (int) pos.y, (int) bounds.getWidth(), (int) bounds.getHeight());
+        g.drawRect((int) pos.getWorldVar().x, (int) pos.getWorldVar().y, (int) bounds.getWidth(), (int) bounds.getHeight());
     }
 
     public void move() {
 
         int rand = (int) (Math.random() * 4);
-
 //        rand = 3;
-
-
         if (System.currentTimeMillis() - moveTurn >= GamePanel.oldFrameCount * 150) {
 
             if (rand == 0) {
