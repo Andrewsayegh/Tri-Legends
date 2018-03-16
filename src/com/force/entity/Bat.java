@@ -36,7 +36,6 @@ public class Bat extends Enemy {
     public void move() {
         int rand = (int) (Math.random() * 4);
         if (System.currentTimeMillis() - moveTurn >= GamePanel.oldFrameCount * 150) {
-
             if (rand == 0) {
                 up = true;
             } else {

@@ -64,7 +64,6 @@ public class PlayState extends GameState {
             gsm.setState(GameStateManager.GAMEOVER);
         else {
             player.update();
-
             player.checkCollision(enemies);
             for (Bat bat: bats) {
                 bat.update(player, 300);
@@ -93,6 +92,5 @@ public class PlayState extends GameState {
             gob.render(g);
         }
     }
-
 }
 

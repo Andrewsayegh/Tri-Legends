@@ -199,7 +199,8 @@ public class Goblin extends Enemy {
             }
         }
     }
-    public void animate(){
+
+    public void animate() {
         super.animate();
     }
 
@@ -207,7 +208,7 @@ public class Goblin extends Enemy {
         super.update();
         move2(player);
 
-        if(getDistanceTo(player) <= 10){
+        if (getDistanceTo(player) <= 10) {
             player.manageLives(-1);
         }
     }

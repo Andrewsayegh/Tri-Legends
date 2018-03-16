@@ -163,7 +163,7 @@ public abstract class Entity {
     public abstract void render(Graphics2D g);
 
     public void manageLives(double num) {
-        if (num < 0 && !invincibility && hasInvincibility) {
+        if (num < 0 && !invincibility) {
             LIVES += num;
             invincibility = true;
             invincibilityCounter = System.currentTimeMillis();
