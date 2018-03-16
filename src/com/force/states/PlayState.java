@@ -41,16 +41,16 @@ public class PlayState extends GameState {
         bats = new ArrayList<Bat>();
         goblins = new ArrayList<Goblin>();
 
-        for (int i = 0; i < 1; i++) {
-            Goblin goblin = new Goblin(new Sprite("entity/enemies/Goblin.png"), new Vector2f(0 + (GamePanel.width / 2) , 0 + (GamePanel.height / 2) + 200), 64);
+        for (int i = 0; i < 50; i++) {
+            Goblin goblin = new Goblin(new Sprite("entity/enemies/Goblin.png"), new Vector2f((float)Math.random()*6400, (float)Math.random()*6400), 64);
             goblins.add(goblin);
         }
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             Bat bat = new Bat(new Sprite("entity/enemies/bat-spritesheet-calciumtrice.png"), new Vector2f((float)Math.random()*6400, (float)Math.random()*6400), 64);
             bats.add(bat);
         }
-        for (Bat bat: bats) {
+        for (Bat bat : bats) {
             enemies.add(bat);
         }
         for (Goblin gob: goblins){
@@ -65,11 +65,25 @@ public class PlayState extends GameState {
         else {
             player.update();
             player.checkCollision(enemies);
-            for (Bat bat: bats) {
-                bat.update(player, 300);
+            if(bats.size() > 0 && enemies.size() > 0) {
+                for (Bat bat : bats) {
+                    bat.update(player, 300);
+                    if (bat.getLIVES() <= 0) {
+                        bats.remove(bat);
+                        enemies.remove(bat);
+                        break;
+                    }
+                }
             }
-            for (Goblin gob: goblins) {
-                gob.update(player);
+            if (goblins.size() > 0 && enemies.size() > 0) {
+                for (Goblin gob : goblins) {
+                    gob.update(player);
+                    if (gob.getLIVES() <= 0) {
+                        goblins.remove(gob);
+                        enemies.remove(gob);
+                        break;
+                    }
+                }
             }
         }
     }

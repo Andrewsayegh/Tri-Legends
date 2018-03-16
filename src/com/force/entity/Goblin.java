@@ -126,6 +126,14 @@ public class Goblin extends Enemy {
                 left = true;
                 pos.x -= 2 * s;
             }
+
+            tc.collisionTile(dx, 0);
+            tc.collisionTile(0, dy);
+
+            if(fallen){
+                manageLives(-2);
+            }
+
             fallen = false;
         }
 
@@ -196,6 +204,9 @@ public class Goblin extends Enemy {
                         pos.y += 2 * s * chargeYdir;
                     }
                 }
+                else
+                    manageLives(-2);
+
             }
         }
     }
@@ -208,7 +219,7 @@ public class Goblin extends Enemy {
         super.update();
         move2(player);
 
-        if (getDistanceTo(player) <= 10) {
+        if (getDistanceTo(player) <= 25) {
             player.manageLives(-1);
         }
     }

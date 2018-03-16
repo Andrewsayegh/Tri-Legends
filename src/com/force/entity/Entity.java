@@ -180,6 +180,10 @@ public abstract class Entity {
         LIVES = lives;
     }
 
+    public double getLIVES() {
+        return LIVES;
+    }
+
     public void manageInvincibility(int count) {
         if (invincibility) {
             if (System.currentTimeMillis() - invincibilityCounter >= GamePanel.oldFrameCount * count) {

@@ -27,7 +27,7 @@ public class ObjBlock extends Block {
         /**
          * DEBUGING COLLISION *
          * SHOW COLLISION BOXES */
-         g.setColor(Color.WHITE);
-         g.drawRect((int) pos.getWorldVar().x, (int) pos.getWorldVar().y, width, height);
+//         g.setColor(Color.WHITE);
+//         g.drawRect((int) pos.getWorldVar().x, (int) pos.getWorldVar().y, width, height);
     }
 }
